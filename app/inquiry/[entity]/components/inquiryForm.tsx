@@ -1,0 +1,68 @@
+import { Button } from "@/components/ui/button"
+
+export function InquiryForm({ nextStep, prevStep, handleChange, formData }) {
+  // Implemente a validação conforme necessário
+  const isValid =
+    formData.jaFezEventos !== "" && formData.temInteresseEmFazerEvento !== "";
+
+  return (
+    <div>
+      <h2>Inquérito</h2>
+      <div>
+        <p>Já fez eventos?</p>
+        <label>
+          <input
+            type="radio"
+            name="jaFezEventos"
+            value="sim"
+            onChange={handleChange}
+          />{" "}
+          Sim
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="jaFezEventos"
+            value="nao"
+            onChange={handleChange}
+          />{" "}
+          Não
+        </label>
+      </div>
+      <div>
+        <label>
+          Número de participantes?
+          <input
+            type="number"
+            name="numeroDeParticipantes"
+            value={formData.numeroDeParticipantes}
+            onChange={handleChange}
+          />
+        </label>
+      </div>
+      <div>
+        <p>Tem interesse em fazer um evento?</p>
+        <label>
+          <input
+            type="radio"
+            name="temInteresseEmFazerEvento"
+            value="sim"
+            onChange={handleChange}
+          />{" "}
+          Sim
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="temInteresseEmFazerEvento"
+            value="nao"
+            onChange={handleChange}
+          />{" "}
+          Não
+        </label>
+      </div>
+      <Button onClick={prevStep}>Retroceder</Button>
+      <Button onClick={nextStep} disabled={!isValid}>Avançar</Button>
+    </div>
+  );
+}
