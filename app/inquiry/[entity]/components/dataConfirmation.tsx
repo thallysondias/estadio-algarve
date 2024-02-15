@@ -4,7 +4,7 @@ export function DataConfirmation({ prevStep, formData }: InquiryFormProps) {
   return (
     <div>
       <h2>Confirmação dos Dados</h2>
-      <p>Entidade: {formData.entidade.join(", ")}</p>
+      <p>Entidade: {formData.entity.join(", ")}</p>
       <p>Já fez eventos? {formData.jaFezEventos}</p>
       <p>Número de participantes: {formData.numeroDeParticipantes}</p>
       <p>
