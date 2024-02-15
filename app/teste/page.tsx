@@ -2,12 +2,8 @@
 
 import React from "react";
 
-import useSWR from "swr";
-import fetcher from "@/lib/fetcher";
-
 import { UserData } from "@/lib/interface";
-
-import { POST } from "@/app/api/egoi/contacts/createNewContact/route";
+import { getContact } from "@/app/api/egoi/contacts/getContact";
 
 export default function Teste() {
   const handleSubmit = async (event: any) => {
@@ -22,10 +18,9 @@ export default function Teste() {
       extra: [],
     };
 
-    const result = await POST(userData);
-    console.log(result);
+    const data = await getContact();
+    console.log(data);
   };
-
 
   return (
     <>

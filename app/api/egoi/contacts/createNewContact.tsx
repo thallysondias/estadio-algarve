@@ -1,8 +1,7 @@
+
 import { UserData } from "@/lib/interface";
-
-export async function POST(userData: UserData) {
+export async function createNewContact(userData: UserData) {
   try {
-
     const res = await fetch("https://api.egoiapp.com/lists/1/contacts", {
       method: "POST",
       headers: {
