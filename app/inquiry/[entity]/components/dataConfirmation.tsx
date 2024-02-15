@@ -1,4 +1,6 @@
-export function DataConfirmation({ prevStep, formData }) {
+import { InquiryFormProps } from "@/lib/interface";
+
+export function DataConfirmation({ prevStep, formData }: InquiryFormProps) {
   return (
     <div>
       <h2>Confirmação dos Dados</h2>

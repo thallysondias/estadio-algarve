@@ -1,6 +1,7 @@
-export function EntityForm({ nextStep, handleChange, formData }) {
+import { InquiryFormProps } from "@/lib/interface";
+export function EntityForm({ nextStep, handleChange, formData }: InquiryFormProps) {
   // Implemente a validação conforme necessário
-  const isValid = formData.entidade.length > 0;
+  const isValid = formData.entity.length > 0;
 
   return (
     <div>

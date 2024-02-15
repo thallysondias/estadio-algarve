@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
+import { InquiryFormProps } from "@/lib/interface";
 
-export function InquiryForm({ nextStep, prevStep, handleChange, formData }) {
+export function InquiryForm({ nextStep, prevStep, handleChange, formData }: InquiryFormProps) {
   // Implemente a validação conforme necessário
   const isValid =
     formData.jaFezEventos !== "" && formData.temInteresseEmFazerEvento !== "";
@@ -16,7 +17,7 @@ export function InquiryForm({ nextStep, prevStep, handleChange, formData }) {
             name="jaFezEventos"
             value="sim"
             onChange={handleChange}
-          />{" "}
+          />
           Sim
         </label>
         <label>

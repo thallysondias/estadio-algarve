@@ -26,3 +26,15 @@ export interface UserData {
   base: BaseInfo;
   extra: ExtraField[];
 }
+
+export interface InquiryFormProps {
+  nextStep?: () => void;
+  prevStep?: () => void;
+  handleChange?: (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>) => void;
+  formData: {
+    entity: string[];
+    jaFezEventos: string;
+    numeroDeParticipantes: string;
+    temInteresseEmFazerEvento: string;
+  };
+}

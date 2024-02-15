@@ -1,4 +1,5 @@
-export function Stepper({ steps, currentStep }) {
+
+export function Stepper({ steps, currentStep }: any) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
         {Array.from({ length: steps }, (_, i) => (
