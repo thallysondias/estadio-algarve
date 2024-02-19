@@ -10,9 +10,9 @@ interface ExtraField {
 }
 interface BaseInfo {
   contact_id?: string; // Agora é opcional
-  status: string;
-  first_name: string;
-  last_name: string;
+  status?: string;
+  first_name?: string;
+  last_name?: string;
   birth_date?: string; // Supondo que este também possa ser opcional
   language?: string;
   email: string;
@@ -24,7 +24,7 @@ interface BaseInfo {
 
 export interface UserData {
   base: BaseInfo;
-  extra: ExtraField[];
+  extra?: ExtraField[];
 }
 
 export interface InquiryFormProps {

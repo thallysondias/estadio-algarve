@@ -6,8 +6,8 @@ export default function Header() {
       <Image
         src="/estadio-do-algarve-white.svg"
         alt="Estadio do Algarve"
-        width={250}
-        height={50}
+        width={300}
+        height={195}
       ></Image>
     </div>
   );

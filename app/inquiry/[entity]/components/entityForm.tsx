@@ -1,5 +1,10 @@
 import { InquiryFormProps } from "@/lib/interface";
-export function EntityForm({ nextStep, handleChange, formData }: InquiryFormProps) {
+import { Button } from "@/components/ui/button";
+export function EntityForm({
+  nextStep,
+  handleChange,
+  formData,
+}: InquiryFormProps) {
   // Implemente a validação conforme necessário
   const isValid = formData.entity.length > 0;
 
@@ -42,9 +47,9 @@ export function EntityForm({ nextStep, handleChange, formData }: InquiryFormProp
         />{" "}
         Produtoras
       </label>
-      <button onClick={nextStep} disabled={!isValid}>
+      <Button onClick={nextStep}>
         Avançar
-      </button>
+      </Button>
     </div>
   );
 }
