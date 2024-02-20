@@ -8,6 +8,7 @@ export default function Header() {
         alt="Estadio do Algarve"
         width={300}
         height={195}
+        priority
       ></Image>
     </div>
   );

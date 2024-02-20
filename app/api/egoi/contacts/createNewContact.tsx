@@ -11,7 +11,6 @@ export async function createNewContact(userData: UserData) {
   });
 
   if (res.ok) {
-    console.log("voltou");
     const data = await res.json();
     return data;
   } else {

@@ -24,7 +24,7 @@ export default function Footer() {
         <li className="hidden md:inline-block p-2 ">|</li>
         <li className="block md:inline p-2">
           <Link href="/unsubscribe">
-            Não quero receber mais comunicações. Remover-me da lista
+            Não quero receber mais comunicações.
           </Link>
         </li>
       </ul>

@@ -15,7 +15,7 @@ export function InquiryForm({ nextStep, prevStep, handleChange, formData }: Inqu
           <input
             type="radio"
             name="jaFezEventos"
-            value="sim"
+            defaultValue="sim"
             onChange={handleChange}
           />
           Sim
@@ -24,7 +24,7 @@ export function InquiryForm({ nextStep, prevStep, handleChange, formData }: Inqu
           <input
             type="radio"
             name="jaFezEventos"
-            value="nao"
+            defaultValue="nao"
             onChange={handleChange}
           />{" "}
           Não
@@ -36,7 +36,7 @@ export function InquiryForm({ nextStep, prevStep, handleChange, formData }: Inqu
           <input
             type="number"
             name="numeroDeParticipantes"
-            value={formData.numeroDeParticipantes}
+            defaultValue={formData.numeroDeParticipantes}
             onChange={handleChange}
           />
         </label>
@@ -56,7 +56,7 @@ export function InquiryForm({ nextStep, prevStep, handleChange, formData }: Inqu
           <input
             type="radio"
             name="temInteresseEmFazerEvento"
-            value="nao"
+            defaultValue="nao"
             onChange={handleChange}
           />{" "}
           Não

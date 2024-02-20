@@ -87,3 +87,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+.inquiry-check button[aria-checked="true"] + .custom-check {
+  background-color: #00634a;
+  color: #fff;
+}

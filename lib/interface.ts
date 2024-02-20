@@ -5,8 +5,8 @@ interface PushToken {
 
 interface ExtraField {
   field_id: number;
-  format: string;
-  value: string;
+  format?: string;
+  value: string | number[] | number;
 }
 interface BaseInfo {
   contact_id?: string; // Agora é opcional
@@ -37,4 +37,9 @@ export interface InquiryFormProps {
     numeroDeParticipantes: string;
     temInteresseEmFazerEvento: string;
   };
+}
+
+export interface userNewTag {
+  contacts: any[];
+  tag_id: number;
 }

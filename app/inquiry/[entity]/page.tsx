@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Stepper } from "./components/stepper";
-import { EntityForm } from "./components/entityForm";
-import { InquiryForm } from "./components/inquiryForm";
-import { DataConfirmation } from "./components/dataConfirmation";
+import { Stepper } from "../../user/[user]/components/stepper";
+import { EntityForm } from "../../user/[user]/components/entityForm";
+import { InquiryForm } from "../../user/[user]/components/inquiryForm";
+import { DataConfirmation } from "../../user/[user]/components/dataConfirmation";
 
 type FormData = {
   entity: string[];
