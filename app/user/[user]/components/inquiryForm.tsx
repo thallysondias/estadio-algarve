@@ -1,10 +1,15 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import { InquiryFormProps } from "@/lib/interface";
 
-export function InquiryForm({ nextStep, prevStep, handleChange, formData }: InquiryFormProps) {
+export function InquiryForm({
+  nextStep,
+  prevStep,
+  handleChange,
+  formData,
+}: InquiryFormProps) {
   // Implemente a validação conforme necessário
   const isValid =
-    formData.jaFezEventos !== "" && formData.temInteresseEmFazerEvento !== "";
+    formData.alreadyEvents !== "" && formData.interestedInOrganizingEvent !== "";
 
   return (
     <div>
@@ -15,8 +20,9 @@ export function InquiryForm({ nextStep, prevStep, handleChange, formData }: Inqu
           <input
             type="radio"
             name="jaFezEventos"
-            defaultValue="sim"
+            value="sim" // Corrigido para 'value'
             onChange={handleChange}
+            checked={formData.alreadyEvents === "sim"} // Adicionado para controle de estado
           />
           Sim
         </label>
@@ -24,8 +30,9 @@ export function InquiryForm({ nextStep, prevStep, handleChange, formData }: Inqu
           <input
             type="radio"
             name="jaFezEventos"
-            defaultValue="nao"
+            value="nao" // Corrigido para 'value'
             onChange={handleChange}
+            checked={formData.alreadyEvents === "nao"} // Adicionado para controle de estado
           />{" "}
           Não
         </label>
@@ -36,7 +43,7 @@ export function InquiryForm({ nextStep, prevStep, handleChange, formData }: Inqu
           <input
             type="number"
             name="numeroDeParticipantes"
-            defaultValue={formData.numeroDeParticipantes}
+            defaultValue={formData.numberOfParticipants}
             onChange={handleChange}
           />
         </label>
@@ -63,7 +70,7 @@ export function InquiryForm({ nextStep, prevStep, handleChange, formData }: Inqu
         </label>
       </div>
       <Button onClick={prevStep}>Retroceder</Button>
-      <Button onClick={nextStep} disabled={!isValid}>Avançar</Button>
+      <Button onClick={nextStep}>Avançar</Button>
     </div>
   );
 }

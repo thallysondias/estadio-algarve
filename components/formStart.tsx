@@ -80,7 +80,7 @@ export default function FormStart() {
 
       await attachTag(userNewTag);
 
-      console.log("Utilizador encontrado:" + user);
+      console.log("Utilizador:" + user);
       router.push(`/user/${user}`);
     } catch (error) {
       console.error("Erro:", error);

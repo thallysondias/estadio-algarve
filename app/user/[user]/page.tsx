@@ -5,24 +5,50 @@ import { EntityForm } from "./components/entityForm";
 import { InquiryForm } from "./components/inquiryForm";
 import { DataConfirmation } from "./components/dataConfirmation";
 
-type FormData = {
-  entity: string[];
-  jaFezEventos: string;
-  numeroDeParticipantes: string;
-  temInteresseEmFazerEvento: string;
-};
-
-
 export default function RegistedUser({ params }: { params: { user: string } }) {
   const user = params.user;
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     entity: [],
-    jaFezEventos: "",
-    numeroDeParticipantes: "",
-    temInteresseEmFazerEvento: "",
+    entityName: "",
+    position: "",
+    personalName: "",
+    cellphone: "",
+    postalCode: "",
+    alreadyEvents: "",
+    numberOfParticipants: "",
+    interestedInOrganizingEvent: "",
   });
-  const handleChange = async (event: any) => {  };
+
+  const handleChange = (event: any) => {
+    const { name, value, type, checked } = event.target;
+
+    const formatPostalCode = (value: string) => {
+      // Remove all non-digit characters and apply the mask
+      console.log("entrou");
+      return value
+        .replace(/\D/g, "")
+        .replace(/(\d{4})(\d)/, "$1-$2")
+        .substring(0, 8);
+    };
+
+    let fieldValue = value;
+    if (name === "postalCode") {
+      fieldValue = formatPostalCode(value);
+    } else {
+      fieldValue =
+        type === "checkbox" || type === "radio"
+          ? checked
+            ? value
+            : ""
+          : value;
+    }
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: fieldValue,
+    }));
+  };
 
   const nextStep = () => {
     setCurrentStep(currentStep + 1);

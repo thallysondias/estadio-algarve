@@ -30,12 +30,22 @@ export interface UserData {
 export interface InquiryFormProps {
   nextStep?: () => void;
   prevStep?: () => void;
-  handleChange?: (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>) => void;
+  handleChange?: (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => void;
   formData: {
     entity: string[];
-    jaFezEventos: string;
-    numeroDeParticipantes: string;
-    temInteresseEmFazerEvento: string;
+    entityName: string;
+    position: string;
+    personalName: string;
+    cellphone: string;
+    postalCode: string;
+    alreadyEvents: string;
+    numberOfParticipants: string;
+    interestedInOrganizingEvent: string;
   };
 }
 
