@@ -5,10 +5,10 @@ export function DataConfirmation({ prevStep, formData }: InquiryFormProps) {
     <div>
       <h2>Confirmação dos Dados</h2>
       <p>Entidade: {formData.entity.join(", ")}</p>
-      <p>Já fez eventos? {formData.jaFezEventos}</p>
-      <p>Número de participantes: {formData.numeroDeParticipantes}</p>
+      <p>Já fez eventos? {formData.alreadyEvents}</p>
+      <p>Número de participantes: {formData.numberOfParticipants}</p>
       <p>
-        Tem interesse em fazer um evento? {formData.temInteresseEmFazerEvento}
+        Tem interesse em fazer um evento? {formData.interestedInOrganizingEvent}
       </p>
       <button onClick={prevStep}>Retroceder</button>
       {/* Implemente qualquer ação de confirmação aqui */}

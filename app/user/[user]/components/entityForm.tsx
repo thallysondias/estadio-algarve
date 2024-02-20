@@ -40,6 +40,7 @@ export function EntityForm({
           defaultValue={formData.entityName}
           type="text"
           onChange={handleChange}
+          required
         />
         <span className="text-sm italic text-gray-600">
           Caso não seja uma identidade, coloque o seu nome.
@@ -55,6 +56,7 @@ export function EntityForm({
           defaultValue={formData.position}
           type="text"
           onChange={handleChange}
+          required
         />
         <span className="text-sm italic  text-gray-600">
           Caso não seja uma identidade, coloque Particular
@@ -71,11 +73,12 @@ export function EntityForm({
           defaultValue={formData.personalName}
           type="text"
           onChange={handleChange}
+          required
         />
       </div>
       <div className="grid w-full  items-center gap-1.5 mt-5">
         <Label htmlFor="cellphone" className="text-lg">
-          Telemóvel
+          Telemóvel do Contacto
         </Label>
         <Input
           id="cellphone"
@@ -83,11 +86,12 @@ export function EntityForm({
           defaultValue={formData.cellphone || "+351"}
           type="text"
           onChange={handleChange}
+          required
         />
       </div>
       <div className="grid w-full  items-center gap-1.5 mt-5">
         <Label htmlFor="postalCode" className="text-lg">
-          Codigo Postal
+          Código postal da entidade que representa
         </Label>
         <Input
           id="postalCode"
@@ -97,6 +101,7 @@ export function EntityForm({
           onChange={handleChange}
           maxLength={8}
           minLength={7}
+          required
         />
       </div>
 

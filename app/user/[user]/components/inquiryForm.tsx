@@ -19,7 +19,7 @@ export function InquiryForm({
         <label>
           <input
             type="radio"
-            name="jaFezEventos"
+            name="alreadyEvents"
             value="sim" // Corrigido para 'value'
             onChange={handleChange}
             checked={formData.alreadyEvents === "sim"} // Adicionado para controle de estado
@@ -29,7 +29,7 @@ export function InquiryForm({
         <label>
           <input
             type="radio"
-            name="jaFezEventos"
+            name="alreadyEvents"
             value="nao" // Corrigido para 'value'
             onChange={handleChange}
             checked={formData.alreadyEvents === "nao"} // Adicionado para controle de estado
@@ -42,7 +42,7 @@ export function InquiryForm({
           Número de participantes?
           <input
             type="number"
-            name="numeroDeParticipantes"
+            name="numberOfParticipants"
             defaultValue={formData.numberOfParticipants}
             onChange={handleChange}
           />
@@ -53,7 +53,7 @@ export function InquiryForm({
         <label>
           <input
             type="radio"
-            name="temInteresseEmFazerEvento"
+            name="interestedInOrganizingEvent"
             value="sim"
             onChange={handleChange}
           />{" "}
@@ -62,7 +62,7 @@ export function InquiryForm({
         <label>
           <input
             type="radio"
-            name="temInteresseEmFazerEvento"
+            name="interestedInOrganizingEvent"
             defaultValue="nao"
             onChange={handleChange}
           />{" "}
