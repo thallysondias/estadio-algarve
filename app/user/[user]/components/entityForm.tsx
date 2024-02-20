@@ -20,7 +20,12 @@ export function EntityForm({
   handleChange,
   formData,
 }: InquiryFormProps) {
-  const isValid = formData.entity.length > 0;
+  const isValid =
+    formData.entityName !== "" &&
+    formData.position !== "" &&
+    formData.personalName !== "" &&
+    formData.cellphone !== "" &&
+    formData.postalCode !== "";
 
   return (
     <div>
@@ -29,7 +34,6 @@ export function EntityForm({
         Conte-nos um pouco sobre a sua instituição através do formulário abaixo:
       </h3>
       <hr className="mt-5 mb-5"></hr>
-
       <div className="grid w-full  items-center gap-1.5 mt-5">
         <Label htmlFor="entityName" className="text-lg">
           Nome da Entidade
@@ -104,9 +108,13 @@ export function EntityForm({
           required
         />
       </div>
-
       <div className="mt-5">
-        <Button onClick={nextStep} className="w-[50%] text-lg p-4" size={"lg"}>
+        <Button
+          onClick={nextStep}
+          className="w-[50%] text-lg p-4"
+          size={"lg"}
+          disabled={!isValid}
+        >
           Avançar
         </Button>
       </div>
