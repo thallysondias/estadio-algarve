@@ -13,7 +13,7 @@ export default function UserLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start align-middle p-5 md:p-12 bg-primary bg-white">
+    <main className="flex min-h-screen flex-col items-center justify-start align-middle p-5 md:p-12 bg-primary max-w-5xl mx-auto bg-white">
       <Image
         src="/estadio-do-algarve.svg"
         alt="Estadio do Algarve"
