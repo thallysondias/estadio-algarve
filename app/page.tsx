@@ -8,13 +8,19 @@ export default function Home() {
         <Header></Header>
         <div>
           <h2 className=" text-white text-xl md:text-3xl mt-8 font-semibold">
-            <span className="block text-3xl md:text-5xl font-bold ">Olá,</span>
-            Pronto/a para tornar o seu evento um marco no Estádio Algarve!
+            <span className="block text-3xl md:text-5xl font-bold ">
+              Bem-vindo/a,
+            </span>
+            Participa e ganha prémios!
           </h2>
-          <ul className="text-white list-disc text-lg md:text-xl list-inside mt-8">
+          <p className="text-white text-lg md:text-xl mt-8">
+            Preenche o formulário abaixo, responde a um pequeno questionário e
+            ganha prémios que podes levantar no stand do Estádio Algarve.
+          </p>
+         {/*  <ul className="text-white list-disc text-lg md:text-xl list-inside mt-8">
             <li>Eventos Memoráveis</li>
             <li>Estrutura Completa</li>
-          </ul>
+          </ul> */}
         </div>
 
         <div className="flex w-full md:max-w-[80%] mt-8">

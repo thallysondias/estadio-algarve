@@ -88,7 +88,9 @@
   }
 }
 
-.inquiry-check button[aria-checked="true"] + .custom-check {
+.inquiry-check button[aria-checked="true"] + .custom-check,
+.inquiry-check input[type="radio"]:checked + .custom-check,
+.inquiry-check input[type="checkbox"]:checked + .custom-check  {
   background-color: #00634a;
   color: #fff;
 }

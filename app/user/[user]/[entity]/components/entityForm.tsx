@@ -47,7 +47,7 @@ export function EntityForm({
           required
         />
         <span className="text-sm italic text-gray-600">
-          Caso não seja uma identidade, coloque o seu nome.
+          Caso não seja uma entidade, coloque o seu nome.
         </span>
       </div>
       <div className="grid w-full items-center gap-1.5 mt-5">
@@ -63,7 +63,7 @@ export function EntityForm({
           required
         />
         <span className="text-sm italic  text-gray-600">
-          Caso não seja uma identidade, coloque Particular
+          Caso não seja uma entidade, coloque Particular
         </span>
       </div>
       <hr className="mt-5 mb-5"></hr>
@@ -113,7 +113,7 @@ export function EntityForm({
           onClick={nextStep}
           className="w-[50%] text-lg p-4"
           size={"lg"}
-          disabled={!isValid}
+        /*   disabled={!isValid} */
         >
           Avançar
         </Button>

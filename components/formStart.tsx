@@ -21,19 +21,7 @@ import { attachTag } from "@/app/api/egoi/tags/attachTag";
 
 import { useForm, Controller } from "react-hook-form";
 
-const options = [
-  { id: 1, id_string: "hotel", name: "Hotel" },
-  { id: 2, id_string: "empresa", name: "Empresa" },
-  { id: 3, id_string: "produtora", name: "Produtora" },
-  {
-    id: 4,
-    id_string: "org-empresa",
-    name: "Empresa de Organização de Eventos",
-  },
-  { id: 5, id_string: "ent-publica", name: "Entidade Pública" },
-  { id: 6, id_string: "associacao", name: "Associação" },
-  { id: 7, id_string: "particular", name: "Particular" },
-];
+import { options } from "@/lib/entity";
 
 export default function FormStart() {
   const [rgpd, setRgpd] = useState(false);
@@ -62,7 +50,7 @@ export default function FormStart() {
       ],
     };
 
-    const tagId = parseInt(data.entity) + 5;
+    const tagId = parseInt(data.entity) + 5;   
 
     try {
       const createContact = await createNewContact(userData);
@@ -81,7 +69,7 @@ export default function FormStart() {
       await attachTag(userNewTag);
 
       console.log("Utilizador:" + user);
-      router.push(`/user/${user}`);
+      router.push(`/user/${user}/${data.entity}`);
     } catch (error) {
       console.error("Erro:", error);
       setIsLoading(false);
@@ -105,7 +93,7 @@ export default function FormStart() {
                 value={field.value}
               >
                 <SelectTrigger className="w-full px-3 py-4 flex-1 h-15 mt-4 text-black">
-                  <SelectValue placeholder="Selecione uma entidade" />
+                  <SelectValue placeholder="Que tipo de entidade representas?" />
                 </SelectTrigger>
                 <SelectContent>
                   {options.map((option) => (
@@ -126,7 +114,7 @@ export default function FormStart() {
           <Input
             {...register("email", { required: true })}
             type="email"
-            placeholder="Insira aqui o seu e-mail profissional"
+            placeholder="Insere aqui o teu email profissional"
             className="w-full px-3 py-4 flex-1 h-15 mt-4 text-black "
             required
           ></Input>
@@ -175,7 +163,7 @@ export default function FormStart() {
         {isLoading ? (
           <UpdateIcon className="animate-spin text-white" />
         ) : (
-          "Vamos começar!"
+          "Regista-te"
         )}
       </Button>
     </form>
