@@ -19,7 +19,6 @@ export default function RegistedUser({
   const user = params.user;
   const entity = params.entity;
   const router = useRouter();
-  router.push("./thank-you");
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     entity: entity,
