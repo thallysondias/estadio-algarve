@@ -19,6 +19,7 @@ export default function RegistedUser({
   const user = params.user;
   const entity = params.entity;
   const router = useRouter();
+
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     entity: entity,
@@ -381,7 +382,7 @@ export default function RegistedUser({
       };
       await attachTag(userNewTag);
     }
-    router.push("/thank-you");
+    router.push("./thank-you");
 
   };
 
