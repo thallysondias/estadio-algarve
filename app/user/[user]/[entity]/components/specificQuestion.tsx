@@ -3,17 +3,6 @@ import { InquiryFormProps } from "@/lib/interface";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 
 export function SpecifQuestion({
   nextStep,
@@ -22,20 +11,20 @@ export function SpecifQuestion({
   formData,
 }: InquiryFormProps) {
   const isValid =
-    (formData.hotel?.hasSpace !== "" &&
-      formData.hotel?.hasInterest !== "") ||
-    (formData.empresa?.organizeEvents !== "" &&
-      formData.empresa?.hasInterest !== "") ||
-    (formData.produtora?.organizeEvents !== "" &&
-      formData.produtora?.hasInterest !== "") ||
-    (formData.orgEventos?.organizeEvents !== "" &&
-      formData.orgEventos?.hasInterest !== "") ||
-    (formData.entPublicas?.organizeEvents !== "" &&
-      formData.entPublicas?.hasInterest !== "") ||
-    (formData.associacao?.organizeEvents !== "" &&
-      formData.associacao?.hasInterest !== "") ||
-    (formData.particular?.organizeEvents !== "" &&
-      formData.particular?.hasInterest !== "");
+  
+    (Number(formData.hotel?.hasSpace) !== 0 && Number(formData.hotel?.hasInterest) !== 0) ||
+    (Number(formData.empresa?.organizeEvents) !== 0 &&
+      Number(formData.empresa?.hasInterest) !== 0) ||
+    (Number(formData.produtora?.organizeEvents) !== 0 &&
+      Number(formData.produtora?.hasInterest) !== 0) ||
+    (Number(formData.orgEventos?.organizeEvents) !== 0 &&
+      Number(formData.orgEventos?.hasInterest) !== 0) ||
+    (Number(formData.entPublicas?.organizeEvents) !== 0 &&
+      Number(formData.entPublicas?.hasInterest) !== 0) ||
+    (Number(formData.associacao?.organizeEvents) !== 0 &&
+      Number(formData.associacao?.hasInterest) !== 0) ||
+    (Number(formData.particular?.organizeEvents) !== 0 &&
+      Number(formData.particular?.hasInterest) !== 0);
 
   const entity = formData.entity;
   const renderEntityQuestion = () => {
@@ -57,7 +46,7 @@ export function SpecifQuestion({
                     id="yes"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.hotel?.hasSpace === "1"}
+                    checked={Number(formData.hotel?.hasSpace) === 1}
                   />
                   <label
                     htmlFor="yes"
@@ -74,7 +63,7 @@ export function SpecifQuestion({
                     id="no"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.hotel?.hasSpace === "2"}
+                    checked={Number(formData.hotel?.hasSpace) === 2}
                   />
                   <label
                     htmlFor="no"
@@ -85,7 +74,7 @@ export function SpecifQuestion({
                 </div>
               </div>
 
-              {formData.hotel?.hasSpace === "1" && (
+              {Number(formData.hotel?.hasSpace) === 1 && (
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="hotel.maxCapacity" className="text-lg">
@@ -114,7 +103,7 @@ export function SpecifQuestion({
                           id="yes-hotel.wantEvent"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.hotel?.wantEvent === "1"}
+                          checked={Number(formData.hotel?.wantEvent) === 1}
                         />
                         <label
                           htmlFor="yes-hotel.wantEvent"
@@ -131,7 +120,7 @@ export function SpecifQuestion({
                           id="maybe-hotel.wantEvent"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.hotel?.wantEvent === "2"}
+                          checked={Number(formData.hotel?.wantEvent) === 2}
                         />
                         <label
                           htmlFor="maybe-hotel.wantEvent"
@@ -148,7 +137,7 @@ export function SpecifQuestion({
                           id="no-hotel.wantEvent"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.hotel?.wantEvent === "3"}
+                          checked={Number(formData.hotel?.wantEvent) === 3}
                         />
                         <label
                           htmlFor="no-hotel.wantEvent"
@@ -175,7 +164,7 @@ export function SpecifQuestion({
                       id="yes-hotel.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.hotel?.hasInterest === "1"}
+                      checked={Number(formData.hotel?.hasInterest) === 1}
                     />
                     <label
                       htmlFor="yes-hotel.hasInterest"
@@ -192,10 +181,10 @@ export function SpecifQuestion({
                       id="maybe-hotel.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.hotel?.hasInterest === "2"}
+                      checked={Number(formData.hotel?.hasInterest) === 2}
                     />
                     <label
-                      htmlFor="maybe-hotel.wantEvent"
+                      htmlFor="maybe-hotel.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
                       Não tenho certeza, gostaria de discutir mais.
@@ -209,7 +198,7 @@ export function SpecifQuestion({
                       id="no-hotel.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.hotel?.hasInterest === "3"}
+                      checked={Number(formData.hotel?.hasInterest) === 3}
                     />
                     <label
                       htmlFor="no-hotel.hasInterest"
@@ -240,7 +229,7 @@ export function SpecifQuestion({
                     id="yes"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.empresa?.organizeEvents === "1"}
+                    checked={Number(formData.empresa?.organizeEvents) === 1}
                   />
                   <label
                     htmlFor="yes"
@@ -257,7 +246,7 @@ export function SpecifQuestion({
                     id="no"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.empresa?.organizeEvents === "2"}
+                    checked={Number(formData.empresa?.organizeEvents) === 2}
                   />
                   <label
                     htmlFor="no"
@@ -268,7 +257,7 @@ export function SpecifQuestion({
                 </div>
               </div>
 
-              {formData.empresa?.organizeEvents === "1" && (
+              {Number(formData.empresa?.organizeEvents) === 1 && (
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="hotel.wantEvent" className="text-lg">
@@ -283,7 +272,7 @@ export function SpecifQuestion({
                           id="teambuilding.typeOfEvents"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.empresa?.typeOfEvents.includes("1")}
+                          checked={formData.empresa?.typeOfEvents.includes(1)}
                         />
                         <label
                           htmlFor="teambuilding.typeOfEvents"
@@ -300,7 +289,7 @@ export function SpecifQuestion({
                           id="eventos.typeOfEvents"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.empresa?.typeOfEvents.includes("2")}
+                          checked={formData.empresa?.typeOfEvents.includes(2)}
                         />
                         <label
                           htmlFor="eventos.typeOfEvents"
@@ -317,7 +306,7 @@ export function SpecifQuestion({
                           id="seminario.typeOfEvents"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.empresa?.typeOfEvents.includes("3")}
+                          checked={formData.empresa?.typeOfEvents.includes(3)}
                         />
                         <label
                           htmlFor="seminario.typeOfEvents"
@@ -334,7 +323,7 @@ export function SpecifQuestion({
                           id="lancamento.typeOfEvents"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.empresa?.typeOfEvents.includes("4")}
+                          checked={formData.empresa?.typeOfEvents.includes(4)}
                         />
                         <label
                           htmlFor="lancamento.typeOfEvents"
@@ -351,7 +340,7 @@ export function SpecifQuestion({
                           id="outros.typeOfEvents"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.empresa?.typeOfEvents.includes("5")}
+                          checked={formData.empresa?.typeOfEvents.includes(5)}
                         />
                         <label
                           htmlFor="outros.typeOfEvents"
@@ -379,7 +368,7 @@ export function SpecifQuestion({
                       id="yes-empresa.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.empresa?.hasInterest === "1"}
+                      checked={Number(formData.empresa?.hasInterest) === 1}
                     />
                     <label
                       htmlFor="yes-empresa.hasInterest"
@@ -396,7 +385,7 @@ export function SpecifQuestion({
                       id="maybe-empresa.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.empresa?.hasInterest === "2"}
+                      checked={Number(formData.empresa?.hasInterest) === 2}
                     />
                     <label
                       htmlFor="maybe-empresa.hasInterest"
@@ -413,7 +402,7 @@ export function SpecifQuestion({
                       id="no-empresa.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.empresa?.hasInterest === "3"}
+                      checked={Number(formData.empresa?.hasInterest) === 3}
                     />
                     <label
                       htmlFor="no-empresa.hasInterest"
@@ -444,7 +433,7 @@ export function SpecifQuestion({
                     id="yes"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.produtora?.organizeEvents === "1"}
+                    checked={Number(formData.produtora?.organizeEvents) === 1}
                   />
                   <label
                     htmlFor="yes"
@@ -461,7 +450,7 @@ export function SpecifQuestion({
                     id="no"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.produtora?.organizeEvents === "2"}
+                    checked={Number(formData.produtora?.organizeEvents) === 2}
                   />
                   <label
                     htmlFor="no"
@@ -472,7 +461,7 @@ export function SpecifQuestion({
                 </div>
               </div>
 
-              {formData.produtora?.organizeEvents === "1" && (
+              {Number(formData.produtora?.organizeEvents) === 1 && (
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="produtora.wantEvent" className="text-lg">
@@ -487,9 +476,7 @@ export function SpecifQuestion({
                           id="teambuilding.typeOfEvents"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.produtora?.typeOfEvents.includes(
-                            "1"
-                          )}
+                          checked={formData.produtora?.typeOfEvents.includes(1)}
                         />
                         <label
                           htmlFor="teambuilding.typeOfEvents"
@@ -506,9 +493,7 @@ export function SpecifQuestion({
                           id="eventos.typeOfEvents"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.produtora?.typeOfEvents.includes(
-                            "2"
-                          )}
+                          checked={formData.produtora?.typeOfEvents.includes(2)}
                         />
                         <label
                           htmlFor="eventos.typeOfEvents"
@@ -525,9 +510,7 @@ export function SpecifQuestion({
                           id="seminario.typeOfEvents"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.produtora?.typeOfEvents.includes(
-                            "3"
-                          )}
+                          checked={formData.produtora?.typeOfEvents.includes(3)}
                         />
                         <label
                           htmlFor="seminario.typeOfEvents"
@@ -544,9 +527,7 @@ export function SpecifQuestion({
                           id="lancamento.typeOfEvents"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.produtora?.typeOfEvents.includes(
-                            "4"
-                          )}
+                          checked={formData.produtora?.typeOfEvents.includes(4)}
                         />
                         <label
                           htmlFor="lancamento.typeOfEvents"
@@ -563,9 +544,7 @@ export function SpecifQuestion({
                           id="outros.typeOfEvents"
                           className="hidden"
                           onChange={handleChange}
-                          checked={formData.produtora?.typeOfEvents.includes(
-                            "5"
-                          )}
+                          checked={formData.produtora?.typeOfEvents.includes(5)}
                         />
                         <label
                           htmlFor="outros.typeOfEvents"
@@ -607,7 +586,7 @@ export function SpecifQuestion({
                       id="yes-produtora.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.produtora?.hasInterest === "1"}
+                      checked={Number(formData.produtora?.hasInterest) === 1}
                     />
                     <label
                       htmlFor="yes-produtora.hasInterest"
@@ -624,7 +603,7 @@ export function SpecifQuestion({
                       id="maybe-produtora.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.produtora?.hasInterest === "2"}
+                      checked={Number(formData.produtora?.hasInterest) === 2}
                     />
                     <label
                       htmlFor="maybe-produtora.hasInterest"
@@ -641,7 +620,7 @@ export function SpecifQuestion({
                       id="no-produtora.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.produtora?.hasInterest === "3"}
+                      checked={Number(formData.produtora?.hasInterest) === 3}
                     />
                     <label
                       htmlFor="no-produtora.hasInterest"
@@ -672,7 +651,7 @@ export function SpecifQuestion({
                     id="yes"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.orgEventos?.organizeEvents === "1"}
+                    checked={Number(formData.orgEventos?.organizeEvents) == 1}
                   />
                   <label
                     htmlFor="yes"
@@ -689,7 +668,7 @@ export function SpecifQuestion({
                     id="no"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.orgEventos?.organizeEvents === "2"}
+                    checked={Number(formData.orgEventos?.organizeEvents) === 2}
                   />
                   <label
                     htmlFor="no"
@@ -700,7 +679,7 @@ export function SpecifQuestion({
                 </div>
               </div>
 
-              {formData.orgEventos?.organizeEvents === "1" && (
+              {Number(formData.orgEventos?.organizeEvents) === 1 && (
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="orgEventos.wantEvent" className="text-lg">
@@ -716,7 +695,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.orgEventos?.typeOfEvents.includes(
-                            "1"
+                            (1).toString()
                           )}
                         />
                         <label
@@ -735,7 +714,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.orgEventos?.typeOfEvents.includes(
-                            "2"
+                            (2).toString()
                           )}
                         />
                         <label
@@ -754,7 +733,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.orgEventos?.typeOfEvents.includes(
-                            "3"
+                            (3).toString()
                           )}
                         />
                         <label
@@ -773,7 +752,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.orgEventos?.typeOfEvents.includes(
-                            "4"
+                            (4).toString()
                           )}
                         />
                         <label
@@ -792,7 +771,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.orgEventos?.typeOfEvents.includes(
-                            "5"
+                            (5).toString()
                           )}
                         />
                         <label
@@ -835,7 +814,7 @@ export function SpecifQuestion({
                       id="yes-orgEventos.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.orgEventos?.hasInterest === "1"}
+                      checked={Number(formData.orgEventos?.hasInterest) === 1}
                     />
                     <label
                       htmlFor="yes-orgEventos.hasInterest"
@@ -852,7 +831,7 @@ export function SpecifQuestion({
                       id="maybe-orgEventos.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.orgEventos?.hasInterest === "2"}
+                      checked={Number(formData.orgEventos?.hasInterest) === 2}
                     />
                     <label
                       htmlFor="maybe-orgEventos.hasInterest"
@@ -869,7 +848,7 @@ export function SpecifQuestion({
                       id="no-orgEventos.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.orgEventos?.hasInterest === "3"}
+                      checked={Number(formData.orgEventos?.hasInterest) === 3}
                     />
                     <label
                       htmlFor="no-orgEventos.hasInterest"
@@ -900,7 +879,7 @@ export function SpecifQuestion({
                     id="yes"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.entPublicas?.organizeEvents === "1"}
+                    checked={Number(formData.entPublicas?.organizeEvents) === 1}
                   />
                   <label
                     htmlFor="yes"
@@ -917,7 +896,7 @@ export function SpecifQuestion({
                     id="no"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.entPublicas?.organizeEvents === "2"}
+                    checked={Number(formData.entPublicas?.organizeEvents) === 2}
                   />
                   <label
                     htmlFor="no"
@@ -928,7 +907,7 @@ export function SpecifQuestion({
                 </div>
               </div>
 
-              {formData.entPublicas?.organizeEvents === "1" && (
+              {Number(formData.entPublicas?.organizeEvents) === 1 && (
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="entPublicas.wantEvent" className="text-lg">
@@ -944,7 +923,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.entPublicas?.typeOfEvents.includes(
-                            "1"
+                            (1).toString()
                           )}
                         />
                         <label
@@ -963,7 +942,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.entPublicas?.typeOfEvents.includes(
-                            "2"
+                            (2).toString()
                           )}
                         />
                         <label
@@ -982,7 +961,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.entPublicas?.typeOfEvents.includes(
-                            "3"
+                            (3).toString()
                           )}
                         />
                         <label
@@ -1001,7 +980,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.entPublicas?.typeOfEvents.includes(
-                            "4"
+                            (4).toString()
                           )}
                         />
                         <label
@@ -1020,7 +999,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.entPublicas?.typeOfEvents.includes(
-                            "5"
+                            (5).toString()
                           )}
                         />
                         <label
@@ -1063,7 +1042,7 @@ export function SpecifQuestion({
                       id="yes-entPublicas.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.entPublicas?.hasInterest === "1"}
+                      checked={Number(formData.entPublicas?.hasInterest) === 1}
                     />
                     <label
                       htmlFor="yes-entPublicas.hasInterest"
@@ -1080,7 +1059,7 @@ export function SpecifQuestion({
                       id="maybe-entPublicas.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.entPublicas?.hasInterest === "2"}
+                      checked={Number(formData.entPublicas?.hasInterest) === 2}
                     />
                     <label
                       htmlFor="maybe-entPublicas.hasInterest"
@@ -1097,7 +1076,7 @@ export function SpecifQuestion({
                       id="no-entPublicas.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.entPublicas?.hasInterest === "3"}
+                      checked={Number(formData.entPublicas?.hasInterest) === 3}
                     />
                     <label
                       htmlFor="no-entPublicas.hasInterest"
@@ -1128,7 +1107,7 @@ export function SpecifQuestion({
                     id="yes"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.associacao?.organizeEvents === "1"}
+                    checked={Number(formData.associacao?.organizeEvents) === 1}
                   />
                   <label
                     htmlFor="yes"
@@ -1145,7 +1124,7 @@ export function SpecifQuestion({
                     id="no"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.associacao?.organizeEvents === "2"}
+                    checked={Number(formData.associacao?.organizeEvents) === 2}
                   />
                   <label
                     htmlFor="no"
@@ -1156,7 +1135,7 @@ export function SpecifQuestion({
                 </div>
               </div>
 
-              {formData.associacao?.organizeEvents === "1" && (
+              {Number(formData.associacao?.organizeEvents) === 1 && (
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="associacao.wantEvent" className="text-lg">
@@ -1172,7 +1151,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.associacao?.typeOfEvents.includes(
-                            "1"
+                            (1).toString()
                           )}
                         />
                         <label
@@ -1191,7 +1170,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.associacao?.typeOfEvents.includes(
-                            "2"
+                            (2).toString()
                           )}
                         />
                         <label
@@ -1210,7 +1189,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.associacao?.typeOfEvents.includes(
-                            "3"
+                            (3).toString()
                           )}
                         />
                         <label
@@ -1229,7 +1208,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.associacao?.typeOfEvents.includes(
-                            "4"
+                            (4).toString()
                           )}
                         />
                         <label
@@ -1248,7 +1227,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.associacao?.typeOfEvents.includes(
-                            "5"
+                            (5).toString()
                           )}
                         />
                         <label
@@ -1291,7 +1270,7 @@ export function SpecifQuestion({
                       id="yes-associacao.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.associacao?.hasInterest === "1"}
+                      checked={Number(formData.associacao?.hasInterest) === 1}
                     />
                     <label
                       htmlFor="yes-associacao.hasInterest"
@@ -1308,7 +1287,7 @@ export function SpecifQuestion({
                       id="maybe-associacao.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.associacao?.hasInterest === "2"}
+                      checked={Number(formData.associacao?.hasInterest) === 2}
                     />
                     <label
                       htmlFor="maybe-associacao.hasInterest"
@@ -1325,7 +1304,7 @@ export function SpecifQuestion({
                       id="no-associacao.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.associacao?.hasInterest === "3"}
+                      checked={Number(formData.associacao?.hasInterest) === 3}
                     />
                     <label
                       htmlFor="no-associacao.hasInterest"
@@ -1356,7 +1335,7 @@ export function SpecifQuestion({
                     id="yes"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.particular?.organizeEvents === "1"}
+                    checked={Number(formData.particular?.organizeEvents) === 1}
                   />
                   <label
                     htmlFor="yes"
@@ -1373,7 +1352,7 @@ export function SpecifQuestion({
                     id="no"
                     className="hidden"
                     onChange={handleChange}
-                    checked={formData.particular?.organizeEvents === "2"}
+                    checked={Number(formData.particular?.organizeEvents) === 2}
                   />
                   <label
                     htmlFor="no"
@@ -1384,7 +1363,7 @@ export function SpecifQuestion({
                 </div>
               </div>
 
-              {formData.particular?.organizeEvents === "1" && (
+              {Number(formData.particular?.organizeEvents) === 1 && (
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="particular.wantEvent" className="text-lg">
@@ -1400,7 +1379,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.particular?.typeOfEvents.includes(
-                            "1"
+                            (1).toString()
                           )}
                         />
                         <label
@@ -1419,7 +1398,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.particular?.typeOfEvents.includes(
-                            "2"
+                            (2).toString()
                           )}
                         />
                         <label
@@ -1438,7 +1417,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.particular?.typeOfEvents.includes(
-                            "3"
+                            (3).toString()
                           )}
                         />
                         <label
@@ -1457,7 +1436,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.particular?.typeOfEvents.includes(
-                            "4"
+                            (4).toString()
                           )}
                         />
                         <label
@@ -1476,7 +1455,7 @@ export function SpecifQuestion({
                           className="hidden"
                           onChange={handleChange}
                           checked={formData.particular?.typeOfEvents.includes(
-                            "5"
+                            (5).toString()
                           )}
                         />
                         <label
@@ -1519,7 +1498,9 @@ export function SpecifQuestion({
                       id="yes-particular.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.particular?.hasInterest === "1"}
+                      checked={Number(formData.particular?.hasInterest) === 1}
+
+                     
                     />
                     <label
                       htmlFor="yes-particular.hasInterest"
@@ -1536,7 +1517,7 @@ export function SpecifQuestion({
                       id="maybe-particular.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.particular?.hasInterest === "2"}
+                      checked={Number(formData.particular?.hasInterest) === 2}
                     />
                     <label
                       htmlFor="maybe-particular.hasInterest"
@@ -1553,7 +1534,7 @@ export function SpecifQuestion({
                       id="no-particular.hasInterest"
                       className="hidden"
                       onChange={handleChange}
-                      checked={formData.particular?.hasInterest === "3"}
+                      checked={Number(formData.particular?.hasInterest) === 3}
                     />
                     <label
                       htmlFor="no-particular.hasInterest"
@@ -1576,7 +1557,12 @@ export function SpecifQuestion({
     <>
       {renderEntityQuestion()}
       <div className="grid grid-cols-2 w-full gap-3 mt-10">
-        <Button onClick={prevStep} className="w-full text-lg p-4" size={"lg"} variant="outline">
+        <Button
+          onClick={prevStep}
+          className="w-full text-lg p-4"
+          size={"lg"}
+          variant="outline"
+        >
           Retroceder
         </Button>
         <Button

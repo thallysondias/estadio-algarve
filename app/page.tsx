@@ -1,5 +1,7 @@
 import Header from "@/components/Header";
+import LogosPartner from "@/components/footerLogos";
 import FormStart from "@/components/formStart";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -17,7 +19,7 @@ export default function Home() {
             Preenche o formulário abaixo, responde a um pequeno questionário e
             ganha prémios que podes levantar no stand do Estádio Algarve.
           </p>
-         {/*  <ul className="text-white list-disc text-lg md:text-xl list-inside mt-8">
+          {/*  <ul className="text-white list-disc text-lg md:text-xl list-inside mt-8">
             <li>Eventos Memoráveis</li>
             <li>Estrutura Completa</li>
           </ul> */}
@@ -26,6 +28,7 @@ export default function Home() {
         <div className="flex w-full md:max-w-[80%] mt-8">
           <FormStart></FormStart>
         </div>
+        <LogosPartner></LogosPartner>
       </div>
     </main>
   );

@@ -6,7 +6,7 @@ export default function Footer() {
       <ul className="text-xs text-center mx-auto text-indigo-900">
         <li className="inline-block p-2">
           <Link
-            href="https://www.farosomostodos.pt/termos-legais/"
+            href="https://estadioalgarve.pt/politica-de-privacidade-e-protecao-de-dados"
             target="_blank"
           >
             Termos e Condições
@@ -15,7 +15,7 @@ export default function Footer() {
         <li className="inline-block p-2">|</li>
         <li className="inline-block p-2">
           <Link
-            href="https://www.farosomostodos.pt/politica-privacidade/"
+            href="https://estadioalgarve.pt/politica-de-privacidade-e-protecao-de-dados"
             target="_blank"
           >
             Politica de Privacidade
@@ -23,9 +23,7 @@ export default function Footer() {
         </li>
         <li className="hidden md:inline-block p-2 ">|</li>
         <li className="block md:inline p-2">
-          <Link href="/unsubscribe">
-            Não quero receber mais comunicações.
-          </Link>
+          <Link href="/unsubscribe">Não quero receber mais comunicações.</Link>
         </li>
       </ul>
     </div>

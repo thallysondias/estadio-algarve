@@ -15,7 +15,7 @@ interface BaseInfo {
   last_name?: string;
   birth_date?: string; // Supondo que este também possa ser opcional
   language?: string;
-  email: string;
+  email?: string;
   cellphone?: string;
   phone?: string;
   push_token_android?: PushToken[]; // Supondo opcional
@@ -23,6 +23,8 @@ interface BaseInfo {
 }
 
 export interface UserData {
+  type?: string;
+  contacts?: string[];
   base: BaseInfo;
   extra?: ExtraField[];
 }
@@ -43,9 +45,9 @@ export interface InquiryFormProps {
     personalName: string;
     cellphone: string;
     postalCode: string;
-    alreadyEvents: string;
-    numberOfParticipants: string;
-    interestedInOrganizingEvent: string;
+    alreadyEvents: number;
+    numberOfParticipants: number;
+    interestedInOrganizingEvent: number;
     hotel?: hotel;
     empresa?: empresa;
     produtora?: produtora;
@@ -59,45 +61,45 @@ export interface InquiryFormProps {
 }
 
 interface hotel{
-  hasSpace: string,
+  hasSpace: number,
   maxCapacity: number | string,
-  wantEvent: string,
-  hasInterest: string,
+  wantEvent: number,
+  hasInterest: number,
 }
 interface empresa {
-  organizeEvents: string,
-  typeOfEvents: string[],
-  hasInterest: string,
+  organizeEvents: number,
+  typeOfEvents: any[],
+  hasInterest: number,
 }
 interface produtora {
-  organizeEvents: string,
-  typeOfEvents: string[],
-  numberOfParticipants: string;
-  hasInterest: string,
+  organizeEvents: number,
+  typeOfEvents: any[],
+  numberOfParticipants: number;
+  hasInterest: number,
 }
 interface orgEventos {
-  organizeEvents: string,
-  typeOfEvents: string[],
-  numberOfParticipants: string;
-  hasInterest: string,
+  organizeEvents: number,
+  typeOfEvents: any[],
+  numberOfParticipants: number;
+  hasInterest: number,
 }
 interface entPublicas {
-  organizeEvents: string,
-  typeOfEvents: string[],
-  numberOfParticipants: string;
-  hasInterest: string,
+  organizeEvents: number,
+  typeOfEvents: any[],
+  numberOfParticipants: number;
+  hasInterest: number,
 }
 interface associacao {
-  organizeEvents: string,
-  typeOfEvents: string[],
-  numberOfParticipants: string;
-  hasInterest: string,
+  organizeEvents: number,
+  typeOfEvents: any[],
+  numberOfParticipants: number;
+  hasInterest: number,
 }
 interface particular {
-  organizeEvents: string,
-  typeOfEvents: string[],
-  numberOfParticipants: string;
-  hasInterest: string,
+  organizeEvents: number,
+  typeOfEvents: any[],
+  numberOfParticipants: number;
+  hasInterest: number,
 }
 
 

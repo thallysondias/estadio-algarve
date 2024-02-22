@@ -2,12 +2,12 @@ import Image from "next/image";
 
 export default function Header() {
   return (
-    <div className="max-w-[180px] md:max-w-[250px] m-auto">
+    <div className="max-w-[200px] md:max-w-[350px] m-auto">
       <Image
-        src="/estadio-do-algarve-white.svg"
+        src="/estadio-20-anos.png"
         alt="Estadio do Algarve"
-        width={0}
-        height={0}
+        width={350}
+        height={247.33}
         priority
         className="w-full"
       ></Image>

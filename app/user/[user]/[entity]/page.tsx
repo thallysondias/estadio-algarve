@@ -1,9 +1,15 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Stepper } from "./components/stepper";
 import { EntityForm } from "./components/entityForm";
-import { SpecifQuestion } from "./components/specifQuestion";
+import { SpecifQuestion } from "./components/specificQuestion";
 import { Avaliation } from "./components/avaliation";
+import { attachTag } from "@/app/api/egoi/tags/attachTag";
+import { updateContact } from "@/app/api/egoi/contacts/updateContact";
+
+import { userNewTag } from "@/lib/interface";
+import { UserData } from "@/lib/interface";
 
 export default function RegistedUser({
   params,
@@ -12,6 +18,8 @@ export default function RegistedUser({
 }) {
   const user = params.user;
   const entity = params.entity;
+  const router = useRouter();
+  router.push("./thank-you");
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     entity: entity,
@@ -20,49 +28,49 @@ export default function RegistedUser({
     personalName: "",
     cellphone: "",
     postalCode: "",
-    alreadyEvents: "",
-    numberOfParticipants: "",
-    interestedInOrganizingEvent: "",
+    alreadyEvents: 0,
+    numberOfParticipants: 0,
+    interestedInOrganizingEvent: 0,
     hotel: {
-      hasSpace: "",
-      maxCapacity: "",
-      wantEvent: "",
-      hasInterest: "",
+      hasSpace: 0,
+      maxCapacity: 0,
+      wantEvent: 0,
+      hasInterest: 0,
     },
     empresa: {
-      organizeEvents: "",
+      organizeEvents: 0,
       typeOfEvents: [],
-      hasInterest: "",
+      hasInterest: 0,
     },
     produtora: {
-      organizeEvents: "",
+      organizeEvents: 0,
       typeOfEvents: [],
-      numberOfParticipants: "",
-      hasInterest: "",
+      numberOfParticipants: 0,
+      hasInterest: 0,
     },
     orgEventos: {
-      organizeEvents: "",
+      organizeEvents: 0,
       typeOfEvents: [],
-      numberOfParticipants: "",
-      hasInterest: "",
+      numberOfParticipants: 0,
+      hasInterest: 0,
     },
     entPublicas: {
-      organizeEvents: "",
+      organizeEvents: 0,
       typeOfEvents: [],
-      numberOfParticipants: "",
-      hasInterest: "",
+      numberOfParticipants: 0,
+      hasInterest: 0,
     },
     associacao: {
-      organizeEvents: "",
+      organizeEvents: 0,
       typeOfEvents: [],
-      numberOfParticipants: "",
-      hasInterest: "",
+      numberOfParticipants: 0,
+      hasInterest: 0,
     },
     particular: {
-      organizeEvents: "",
+      organizeEvents: 0,
       typeOfEvents: [],
-      numberOfParticipants: "",
-      hasInterest: "",
+      numberOfParticipants: 0,
+      hasInterest: 0,
     },
     avaliation: "",
     additionalComments: "",
@@ -129,66 +137,253 @@ export default function RegistedUser({
     setCurrentStep(currentStep - 1);
   };
 
-  const submitForm = () => {
+  const formatCellphone = (cellphone: string) => {
+    const numericOnly = cellphone.replace(/[^\d+]/g, "");
+    const withoutPlus = numericOnly.startsWith("+351")
+      ? numericOnly.slice(1)
+      : numericOnly;
+    const standardized = withoutPlus.startsWith("351")
+      ? withoutPlus
+      : `351${withoutPlus}`;
+    const formatted = standardized.replace(/(351)(\d+)/, "$1-$2");
+    return formatted.length === 13 ? formatted : cellphone;
+  };
+
+  const submitForm = async () => {
     let specificFields: any = [];
-    switch (entity) {
+    switch (Number(entity)) {
       //Hotel
       case 1:
         specificFields = [
           {
             field_id: 6,
-            value: formData.hotel.hasSpace,
+            value: Number(formData.hotel.hasSpace),
           }, // Possui espaço para eventos
           {
             field_id: 7,
-            value: formData.hotel.maxCapacity,
+            value: Number(formData.hotel.maxCapacity),
           }, // Capacidade Maxima
           {
             field_id: 8,
-            value: formData.hotel.wantEvent,
+            value: Number(formData.hotel.wantEvent),
           }, // Interessado em Colaborar
           {
             field_id: 9,
-            value: formData.hotel.hasInterest,
+            value: Number(formData.hotel.hasInterest),
           }, // Interessado em desenvolver parceria
         ];
         break;
+      //Empresa
       case 2:
+        specificFields = [
+          {
+            field_id: 10,
+            value: Number(formData.empresa.organizeEvents),
+          }, // Possui espaço para eventos
+          {
+            field_id: 11,
+            value: formData.empresa.typeOfEvents.map(Number),
+          }, // Tipos de Evento
+          {
+            field_id: 12,
+            value: Number(formData.hotel.hasInterest),
+          }, // Interessado em desenvolver parceria
+        ];
+        break;
+      //Produtoras
+      case 3:
+        specificFields = [
+          {
+            field_id: 13,
+            value: Number(formData.produtora.organizeEvents),
+          }, // Possui espaço para eventos
+          {
+            field_id: 14,
+            value: formData.produtora.typeOfEvents.map(Number),
+          }, // Tipos de Evento
+          {
+            field_id: 15,
+            value: Number(formData.produtora.numberOfParticipants),
+          }, // Numero de Participantes
+          {
+            field_id: 16,
+            value: Number(formData.produtora.hasInterest),
+          }, // Interessado em desenvolver parceria
+        ];
+        break;
+      //Org de Eventos
+      case 4:
+        specificFields = [
+          {
+            field_id: 17,
+            value: Number(formData.orgEventos.organizeEvents),
+          }, // Ja organizou Eventos?
+          {
+            field_id: 18,
+            value: formData.orgEventos.typeOfEvents.map(Number),
+          }, // Tipos de Evento
+          {
+            field_id: 19,
+            value: Number(formData.orgEventos.numberOfParticipants),
+          }, // Numero de Participantes
+          {
+            field_id: 20,
+            value: Number(formData.orgEventos.hasInterest),
+          }, // Interessado em desenvolver parceria
+        ];
+        break;
+      //Entidades Publicas
+      case 5:
+        specificFields = [
+          {
+            field_id: 21,
+            value: Number(formData.entPublicas.organizeEvents),
+          }, // Possui espaço para eventos
+          {
+            field_id: 22,
+            value: formData.entPublicas.typeOfEvents.map(Number),
+          }, // Tipos de Evento
+          {
+            field_id: 23,
+            value: Number(formData.entPublicas.numberOfParticipants),
+          }, // Numero de Participantes
+          {
+            field_id: 24,
+            value: Number(formData.entPublicas.hasInterest),
+          }, // Interessado em desenvolver parceria
+        ];
+        break;
+      //Associações
+      case 6:
+        specificFields = [
+          {
+            field_id: 25,
+            value: Number(formData.associacao.organizeEvents),
+          }, // Possui espaço para eventos
+          {
+            field_id: 26,
+            value: formData.associacao.typeOfEvents.map(Number),
+          }, // Tipos de Evento
+          {
+            field_id: 27,
+            value: Number(formData.associacao.numberOfParticipants),
+          }, // Numero de Participantes
+          {
+            field_id: 28,
+            value: Number(formData.associacao.hasInterest),
+          }, // Interessado em desenvolver parceria
+        ];
+        break;
+      //Associações
+      case 7:
+        specificFields = [
+          {
+            field_id: 29,
+            value: Number(formData.particular.organizeEvents),
+          }, // Possui espaço para eventos
+          {
+            field_id: 30,
+            value: formData.particular.typeOfEvents.map(Number),
+            /*   value: formData.particular.typeOfEvents ? formData.particular.typeOfEvents.map(Number) : 0 , */
+          }, // Tipos de Evento
+          {
+            field_id: 31,
+            value: Number(formData.particular.numberOfParticipants)
+              ? Number(formData.particular.numberOfParticipants)
+              : 0,
+          }, // Numero de Participantes
+          {
+            field_id: 36,
+            value: Number(formData.particular.hasInterest),
+          }, // Interessado em desenvolver parceria
+        ];
+        break;
     }
 
-    const body = JSON.stringify({
+    const userData: UserData = {
       type: "contacts",
       contacts: [user],
       base: {
         first_name: formData.personalName,
-        cellphone: formData.cellphone,
+        cellphone: formatCellphone(formData.cellphone),
       },
       extra: [
         {
-          field_id: 1, // Entidade
+          field_id: 1,
           value: formData.entityName,
-        },
+        }, // Entidade
         {
-          field_id: 2, // Codigo Postal
+          field_id: 2,
           value: formData.postalCode,
-        },
+        }, // Codigo Postal
         {
-          field_id: 3, // Tipo de Entidade
-          value: formData.entity,
-        },
+          field_id: 3,
+          value: Number(entity),
+        }, // Tipo de Entidade
         {
-          field_id: 4, // Possibilidade de Organizar um evento
-          value: "",
-        },
+          field_id: 4,
+          value: Number(formData.avaliation) + 1,
+        }, // Possibilidade de Organizar um evento
         {
-          field_id: 5, // Comentários adicionais
+          field_id: 5,
           value: formData.additionalComments,
-        },
+        }, // Comentários adicionais
         ...specificFields,
       ],
-    });
+    };
 
-    console.log(body);
+     try {
+      const update = await updateContact(userData);
+      console.log(update);
+    } catch (error) {
+      console.error("Erro:", error);
+    }
+    console.log(userData);
+
+    //Tags
+    let userNewTag: userNewTag;
+    let alreadyEvents;
+    let interestedInOrganizingEvent;
+
+    //Se ja fez eventos no estadio
+    if (
+      formData.produtora.organizeEvents == 1 ||
+      formData.orgEventos.organizeEvents == 1 ||
+      formData.entPublicas.organizeEvents == 1 ||
+      formData.associacao.organizeEvents == 1 ||
+      formData.particular.organizeEvents == 1
+    ) {
+      alreadyEvents = 1;
+    }
+    //Se tem interesse em fazer evento
+    if (
+      formData.produtora.hasInterest == 1 ||
+      formData.orgEventos.hasInterest == 1 ||
+      formData.entPublicas.hasInterest == 1 ||
+      formData.associacao.hasInterest == 1 ||
+      formData.particular.hasInterest == 1
+    ) {
+      interestedInOrganizingEvent = 1;
+    }
+
+    //Já Organizou Eventos
+    if (alreadyEvents == 1) {
+      userNewTag = {
+        contacts: [user],
+        tag_id: 1, //Sim
+      };
+      await attachTag(userNewTag);
+    }
+
+    if (interestedInOrganizingEvent == 1) {
+      userNewTag = {
+        contacts: [user],
+        tag_id: 3, //Sim
+      };
+      await attachTag(userNewTag);
+    }
+    router.push("/thank-you");
+
   };
 
   const renderStep = () => {
@@ -220,7 +415,7 @@ export default function RegistedUser({
           />
         );
       default:
-        return <div>Formulário concluído! </div>;
+        return (<>Formulário Finalizado</>);
     }
   };
 

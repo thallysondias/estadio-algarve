@@ -3,17 +3,6 @@ import { InquiryFormProps } from "@/lib/interface";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 
 export function EntityForm({
   nextStep,
@@ -25,7 +14,7 @@ export function EntityForm({
     formData.position !== "" &&
     formData.personalName !== "" &&
     formData.cellphone !== "" &&
-    formData.postalCode !== "";
+    formData.postalCode.length >= 7 ;
 
   return (
     <div>
@@ -113,7 +102,7 @@ export function EntityForm({
           onClick={nextStep}
           className="w-[50%] text-lg p-4"
           size={"lg"}
-        /*   disabled={!isValid} */
+          disabled={!isValid}
         >
           Avançar
         </Button>
