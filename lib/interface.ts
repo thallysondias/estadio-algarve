@@ -64,7 +64,7 @@ interface hotel{
   hasSpace: number,
   maxCapacity: number | string,
   wantEvent: number,
-  hasInterest: any | null,
+  hasInterest: number | null,
 }
 interface empresa {
   organizeEvents: number,

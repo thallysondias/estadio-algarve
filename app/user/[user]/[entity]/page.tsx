@@ -169,7 +169,7 @@ export default function RegistedUser({
           }, // Interessado em Colaborar
           {
             field_id: 9,
-            value: [Number(formData.hotel.hasInterest)],
+            value: Number(formData.hotel.hasInterest) !== 0 ? [Number(formData.hotel.hasInterest)] : [],
           }, // Interessado em desenvolver parceria
         ];
         break;
@@ -186,7 +186,7 @@ export default function RegistedUser({
           }, // Tipos de Evento
           {
             field_id: 12,
-            value: [Number(formData.hotel.hasInterest)],
+            value: Number(formData.hotel.hasInterest) !== 0 ? [Number(formData.empresa.hasInterest)] : [],
           }, // Interessado em desenvolver parceria
         ];
         break;

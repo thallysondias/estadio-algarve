@@ -11,8 +11,7 @@ export function SpecifQuestion({
   formData,
 }: InquiryFormProps) {
   const isValid =
-    (Number(formData.hotel?.hasSpace) !== 0 &&
-      Number(formData.hotel?.hasInterest) !== 0) ||
+    (Number(formData.hotel?.hasSpace) !== 0) ||
     (Number(formData.empresa?.organizeEvents) !== 0 &&
       Number(formData.empresa?.hasInterest) !== 0) ||
     (Number(formData.produtora?.organizeEvents) !== 0 &&
@@ -27,6 +26,9 @@ export function SpecifQuestion({
       Number(formData.particular?.hasInterest) !== 0);
 
   const entity = formData.entity;
+  console.log(formData.hotel?.hasInterest)
+  console.log(formData.hotel?.wantEvent)
+  console.log(formData.hotel?.maxCapacity)
 
   const optionsProdutora = [
     { id: "confSeminario", name: "Conferências e seminários", value: 1 },
