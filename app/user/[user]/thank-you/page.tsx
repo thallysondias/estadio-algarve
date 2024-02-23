@@ -5,7 +5,16 @@ import Header from "@/components/Header";
 import LogosPartner from "@/components/footerLogos";
 import WheelOfPrize from "@/components/wheelOfPrize";
 
-export default function ThankYouPage() {
+import { attachTag } from "@/app/api/egoi/tags/attachTag";
+
+import { userNewTag } from "@/lib/interface";
+
+export default function ThankYouPage({
+  params,
+}: {
+  params: { user: string; entity: number };
+}) {
+  const user = params.user;
   const [tempoRestante, setTempoRestante] = useState(25);
   const [prizeNumber, setPrizeNumber] = useState(null);
 
@@ -14,6 +23,33 @@ export default function ThankYouPage() {
   useEffect(() => {
     if (prizeNumber !== null) {
       console.log("entrou");
+
+      const handleAttachTag = async () => {
+        let prizeTag;
+  
+        if ([0,4].includes(prizeNumber)) {
+          prizeTag = 13;
+        } else if ([1,5].includes(prizeNumber)) {
+          prizeTag = 14;
+        } else if ([2,6].includes(prizeNumber)) {
+          prizeTag = 15;
+        } else if ([3,7].includes(prizeNumber)) { 
+          prizeTag = 16;
+        }
+  
+        if (prizeTag) {
+          const userNewTag: userNewTag = {
+            contacts: [user],
+            tag_id: prizeTag,
+          };
+          try {
+            await attachTag(userNewTag);
+          } catch (error) {
+            console.error("Erro ao anexar tag:", error);
+          }
+        }
+      };  
+      handleAttachTag();
 
       const intervalId = setInterval(() => {
         // Atualizar o tempo restante a cada segundo
