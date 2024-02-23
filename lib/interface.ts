@@ -64,42 +64,42 @@ interface hotel{
   hasSpace: number,
   maxCapacity: number | string,
   wantEvent: number,
-  hasInterest: number,
+  hasInterest: any | null,
 }
 interface empresa {
   organizeEvents: number,
   typeOfEvents: any[],
-  hasInterest: number,
+  hasInterest: number | null,
 }
 interface produtora {
   organizeEvents: number,
   typeOfEvents: any[],
   numberOfParticipants: number;
-  hasInterest: number,
+  hasInterest: number | null,
 }
 interface orgEventos {
   organizeEvents: number,
   typeOfEvents: any[],
   numberOfParticipants: number;
-  hasInterest: number,
+  hasInterest: number | null,
 }
 interface entPublicas {
   organizeEvents: number,
   typeOfEvents: any[],
   numberOfParticipants: number;
-  hasInterest: number,
+  hasInterest: number | null,
 }
 interface associacao {
   organizeEvents: number,
   typeOfEvents: any[],
   numberOfParticipants: number;
-  hasInterest: number,
+  hasInterest: number | null,
 }
 interface particular {
   organizeEvents: number,
   typeOfEvents: any[],
   numberOfParticipants: number;
-  hasInterest: number,
+  hasInterest: number | null,
 }
 
 

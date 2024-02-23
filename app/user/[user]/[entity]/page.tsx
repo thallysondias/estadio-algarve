@@ -35,42 +35,42 @@ export default function RegistedUser({
       hasSpace: 0,
       maxCapacity: 0,
       wantEvent: 0,
-      hasInterest: 0,
+      hasInterest: null,
     },
     empresa: {
       organizeEvents: 0,
       typeOfEvents: [],
-      hasInterest: 0,
+      hasInterest: null,
     },
     produtora: {
       organizeEvents: 0,
       typeOfEvents: [],
-       numberOfParticipants: 0,
-      hasInterest: 0,
+      numberOfParticipants: 0,
+      hasInterest: null,
     },
     orgEventos: {
       organizeEvents: 0,
       typeOfEvents: [],
-       numberOfParticipants: 0,
-      hasInterest: 0,
+      numberOfParticipants: 0,
+      hasInterest: null,
     },
     entPublicas: {
       organizeEvents: 0,
       typeOfEvents: [],
-       numberOfParticipants: 0,
-      hasInterest: 0,
+      numberOfParticipants: 0,
+      hasInterest: null,
     },
     associacao: {
       organizeEvents: 0,
       typeOfEvents: [],
-       numberOfParticipants: 0,
-      hasInterest: 0,
+      numberOfParticipants: 0,
+      hasInterest: null,
     },
     particular: {
       organizeEvents: 0,
       typeOfEvents: [],
-       numberOfParticipants: 0,
-      hasInterest: 0,
+      numberOfParticipants: 0,
+      hasInterest: null,
     },
     avaliation: 0,
     additionalComments: "",
@@ -320,7 +320,7 @@ export default function RegistedUser({
         }, // Tipo de Entidade
         {
           field_id: 4,
-          value: [Number(formData.avaliation) + 1],
+          value: [Number(formData.avaliation)],
         }, // Possibilidade de Organizar um evento
         {
           field_id: 5,
@@ -331,14 +331,14 @@ export default function RegistedUser({
     };
 
     console.log(userData);
-     try {
-      console.log(user)
+    try {
+      console.log(user);
       const update = await updateSpecifcContact(userData, user);
       console.log(update);
     } catch (error) {
       console.error("Erro:", error);
     }
-   
+
     //Tags
     let userNewTag: userNewTag;
     let alreadyEvents;
@@ -381,8 +381,7 @@ export default function RegistedUser({
       };
       await attachTag(userNewTag);
     }
-   router.push("./thank-you");
-
+    router.push("./thank-you");
   };
 
   const renderStep = () => {
@@ -414,7 +413,7 @@ export default function RegistedUser({
           />
         );
       default:
-        return (<>Formulário Finalizado</>);
+        return <>Formulário Finalizado</>;
     }
   };
 
@@ -425,7 +424,3 @@ export default function RegistedUser({
     </>
   );
 }
-
-
-
-
