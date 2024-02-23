@@ -9,6 +9,13 @@ export default function LogosPartner() {
         height={20}
         priority
       ></Image>
+       <Image
+        src="/logo-estadio.png"
+        alt="Estadio Algarve"
+        width={100}
+        height={20}
+        priority
+      ></Image>
       <Image
         src="/cm-faro.png"
         alt="CM Faro"
@@ -16,13 +23,7 @@ export default function LogosPartner() {
         height={20}
         priority
       ></Image>
-      <Image
-        src="/logo-estadio.png"
-        alt="Estadio Algarve"
-        width={100}
-        height={20}
-        priority
-      ></Image>
+     
     </div>
   );
 }

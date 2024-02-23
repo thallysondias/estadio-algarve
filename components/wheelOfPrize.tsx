@@ -4,35 +4,35 @@ import { Wheel } from "react-custom-roulette";
 
 const data = [
   {
-    option: "T-shirt",
+    option: "Caneta",
     style: { backgroundColor: "#0F2E46", textColor: "#6CB8DA " },
   },
   {
-    option: "Ingressos",
+    option: "Bloco de Notas",
     style: { backgroundColor: "#6CB8DA ", textColor: "#0F2E46" },
   },
   {
-    option: "Não foi desta vez",
+    option: "T-Shirt",
     style: { backgroundColor: "#F1803D ", textColor: "#0F2E46" },
   },
   {
-    option: "Brinde",
+    option: "Cantil",
     style: { backgroundColor: "#F3E04E  ", textColor: "#0F2E46" },
   },
   {
-    option: "T-shirt",
+    option: "Caneta",
     style: { backgroundColor: "#0F2E46", textColor: "#6CB8DA " },
   },
   {
-    option: "Ingressos",
+    option: "Bloco de Notas",
     style: { backgroundColor: "#6CB8DA ", textColor: "#0F2E46" },
   },
   {
-    option: "Não foi desta vez",
+    option: "T-Shirt",
     style: { backgroundColor: "#F1803D ", textColor: "#0F2E46" },
   },
   {
-    option: "Brinde",
+    option: "Cantil",
     style: { backgroundColor: "#F3E04E  ", textColor: "#0F2E46" },
   },
 ];

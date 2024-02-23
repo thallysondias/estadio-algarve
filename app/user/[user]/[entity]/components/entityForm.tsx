@@ -14,18 +14,28 @@ export function EntityForm({
     formData.position !== "" &&
     formData.personalName !== "" &&
     formData.cellphone !== "" &&
-    formData.postalCode.length >= 7 ;
+    formData.postalCode.length >= 7;
+
+  const formatPostalCode = (event: any) => {
+    // Remove all non-digit characters and apply the mask
+    let value = event.target.value;
+    return value
+      .replace(/\D/g, "")
+      .replace(/(\d{4})(\d)/, "$1-$2")
+      .substring(0, 8);
+  };
 
   return (
     <div>
-      <h2 className="text-4xl font-bold text-primary">Olá,</h2>
-      <h3 className="text-xl  text-primary">
-        Conte-nos um pouco sobre a sua instituição através do formulário abaixo:
-      </h3>
+      <h2 className="text-4xl font-bold text-primary">
+        Adoraríamos saber mais sobre ti e a tua organização!
+      </h2>
+      <h3 className="text-xl  text-primary">Preenche o formulário abaixo:</h3>
       <hr className="mt-5 mb-5"></hr>
       <div className="grid w-full  items-center gap-1.5 mt-5">
         <Label htmlFor="entityName" className="text-lg">
-          Nome da Entidade
+          Nome da Entidade/Organização
+          <span className="text-red-500 text-sm font-light">*</span>
         </Label>
         <Input
           id="entityName"
@@ -36,12 +46,12 @@ export function EntityForm({
           required
         />
         <span className="text-sm italic text-gray-600">
-          Caso não seja uma entidade, coloque o seu nome.
+          Se não representas uma entidade, indica o teu nome pessoal.
         </span>
       </div>
       <div className="grid w-full items-center gap-1.5 mt-5">
         <Label htmlFor="position" className="text-lg">
-          Cargo
+          Cargo <span className="text-red-500 text-sm font-light">*</span>
         </Label>
         <Input
           id="position"
@@ -52,13 +62,14 @@ export function EntityForm({
           required
         />
         <span className="text-sm italic  text-gray-600">
-          Caso não seja uma entidade, coloque Particular
+          Se fores um particular, indica <b>Particular</b>.
         </span>
       </div>
       <hr className="mt-5 mb-5"></hr>
       <div className="grid w-full  items-center gap-1.5 mt-5">
         <Label htmlFor="personalName" className="text-lg">
-          Nome
+          Nome e Apelido 
+          <span className="text-red-500 text-sm font-light">*</span>
         </Label>
         <Input
           id="personalName"
@@ -71,31 +82,41 @@ export function EntityForm({
       </div>
       <div className="grid w-full  items-center gap-1.5 mt-5">
         <Label htmlFor="cellphone" className="text-lg">
-          Telemóvel do Contacto
+          Telemóvel <span className="text-red-500 text-sm font-light">*</span>
         </Label>
         <Input
           id="cellphone"
           name="cellphone"
-          defaultValue={formData.cellphone || "+351"}
-          type="text"
+          defaultValue={formData.cellphone}
+          type="number"
           onChange={handleChange}
+          maxLength={9}
           required
         />
+        <span className="text-sm italic  text-gray-600">
+          Apenas os 9 digitos
+        </span>
       </div>
       <div className="grid w-full  items-center gap-1.5 mt-5">
         <Label htmlFor="postalCode" className="text-lg">
-          Código postal da entidade que representa
+          Código postal 
+          <span className="text-red-500 text-sm font-light">*</span>
         </Label>
         <Input
           id="postalCode"
           name="postalCode"
-          defaultValue={formData.postalCode}
-          type="string"
-          onChange={handleChange}
+          value={formData.postalCode} // Usa o estado diretamente como valor
+          type="text"
+          onChange={handleChange} // Usa o handler específico para código postal
           maxLength={8}
           minLength={7}
           required
+          onKeyUp={formatPostalCode}
         />
+
+        <span className="text-sm italic  text-gray-600">
+          Informe os 7 digitos do cód. postal
+        </span>
       </div>
       <div className="mt-5">
         <Button

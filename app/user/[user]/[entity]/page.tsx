@@ -6,7 +6,7 @@ import { EntityForm } from "./components/entityForm";
 import { SpecifQuestion } from "./components/specificQuestion";
 import { Avaliation } from "./components/avaliation";
 import { attachTag } from "@/app/api/egoi/tags/attachTag";
-import { updateContact } from "@/app/api/egoi/contacts/updateContact";
+import { updateSpecifcContact } from "@/app/api/egoi/contacts/updateSpecifcContact";
 
 import { userNewTag } from "@/lib/interface";
 import { UserData } from "@/lib/interface";
@@ -45,34 +45,34 @@ export default function RegistedUser({
     produtora: {
       organizeEvents: 0,
       typeOfEvents: [],
-      numberOfParticipants: 0,
+       numberOfParticipants: 0,
       hasInterest: 0,
     },
     orgEventos: {
       organizeEvents: 0,
       typeOfEvents: [],
-      numberOfParticipants: 0,
+       numberOfParticipants: 0,
       hasInterest: 0,
     },
     entPublicas: {
       organizeEvents: 0,
       typeOfEvents: [],
-      numberOfParticipants: 0,
+       numberOfParticipants: 0,
       hasInterest: 0,
     },
     associacao: {
       organizeEvents: 0,
       typeOfEvents: [],
-      numberOfParticipants: 0,
+       numberOfParticipants: 0,
       hasInterest: 0,
     },
     particular: {
       organizeEvents: 0,
       typeOfEvents: [],
-      numberOfParticipants: 0,
+       numberOfParticipants: 0,
       hasInterest: 0,
     },
-    avaliation: "",
+    avaliation: 0,
     additionalComments: "",
   });
 
@@ -198,7 +198,7 @@ export default function RegistedUser({
             value: Number(formData.produtora.organizeEvents),
           }, // Possui espaço para eventos
           {
-            field_id: 14,
+            field_id: 37, //correção
             value: formData.produtora.typeOfEvents.map(Number),
           }, // Tipos de Evento
           {
@@ -301,8 +301,6 @@ export default function RegistedUser({
     }
 
     const userData: UserData = {
-      type: "contacts",
-      contacts: [user],
       base: {
         first_name: formData.personalName,
         cellphone: formatCellphone(formData.cellphone),
@@ -332,14 +330,15 @@ export default function RegistedUser({
       ],
     };
 
+    console.log(userData);
      try {
-      const update = await updateContact(userData);
+      console.log(user)
+      const update = await updateSpecifcContact(userData, user);
       console.log(update);
     } catch (error) {
       console.error("Erro:", error);
     }
-    console.log(userData);
-
+   
     //Tags
     let userNewTag: userNewTag;
     let alreadyEvents;
@@ -382,7 +381,7 @@ export default function RegistedUser({
       };
       await attachTag(userNewTag);
     }
-    router.push("./thank-you");
+   router.push("./thank-you");
 
   };
 

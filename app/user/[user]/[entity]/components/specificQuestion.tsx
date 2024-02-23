@@ -27,6 +27,56 @@ export function SpecifQuestion({
       Number(formData.particular?.hasInterest) !== 0);
 
   const entity = formData.entity;
+
+  const optionsProdutora = [
+    { id: "confSeminario", name: "Conferências e seminários", value: 1 },
+    { id: "eventoCorporativo", name: "Evento corporativo", value: 2 },
+    { id: "eventoDesportivo", name: "Evento desportivo", value: 3 },
+    {
+      id: "eventoCultural",
+      name: "Evento cultural",
+      value: 4,
+    },
+    { id: "eventoPrivado", name: "Evento privado", value: 5 },
+    { id: "festivalMusica", name: "Festival de Música", value: 6 },
+    { id: "feiraExposicao", name: "Feira ou exposição", value: 7 },
+    {
+      id: "lancamentoServico",
+      name: "Lançamento de produtos/marcas/serviços",
+      value: 8,
+    },
+    { id: "outros", name: "Outro", value: 9 },
+  ];
+
+  const optionsEntidadePublica = [
+    { id: "eventoPublico", name: "Evento público", value: 1 },
+    { id: "eventoDesportivo", name: "Evento desportivo", value: 2 },
+    { id: "eventoCultura", name: "Evento Cultural", value: 3 },
+    { id: "festival", name: "Evento Festival de música", value: 4 },
+    { id: "feira", name: "Feira ou exposição", value: 5 },
+    { id: "reuniao", name: "Reunião", value: 6 },   
+    { id: "outros", name: "Outro", value: 7 },
+  ];
+
+  const optionsAssociacao = [
+    { id: "eventoDesportivo", name: "Evento desportivo", value: 1 },
+    { id: "eventoCultura", name: "Evento Cultural", value: 2 },
+    { id: "festival", name: "Evento Festival de música", value: 3 },
+    { id: "feira", name: "Feira ou exposição", value: 4 },
+    { id: "conferencia", name: "Conferências e seminários", value: 5 },   
+    { id: "outros", name: "Outro", value: 6 },
+  ];
+
+  const optionsParticular = [
+    { id: "eventoPrivado", name: "Evento Privado", value: 1 },
+    { id: "celebracaoEspecial", name: "Celebração especial", value: 2 },
+    { id: "casamento", name: "Casamento", value: 3 },
+    { id: "batizado", name: "Batizado", value: 4 },
+    { id: "aniversario", name: "Aniversário", value: 5 },   
+    { id: "outros", name: "Outro", value: 6 },
+  ];
+
+
   const renderEntityQuestion = () => {
     switch (entity) {
       case "1": //Hotel
@@ -34,7 +84,7 @@ export function SpecifQuestion({
           <>
             <div className="grid w-full  items-center gap-1.5 mt-5">
               <Label htmlFor="entityName" className="text-lg">
-                O seu hotel possui espaço para eventos corporativos?
+                A tua unidade tem espaço próprio para a organização de eventos?
               </Label>
 
               <div className="grid gap-1.5 items-center inquiry-check">
@@ -78,21 +128,22 @@ export function SpecifQuestion({
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="hotel.maxCapacity" className="text-lg">
-                      Qual a capacidade máxima?
+                      Se sim, qual é a capacidade máxima dos eventos que
+                      conseguem organizar no vosso espaço?
                     </Label>
                     <Input
                       type="number"
                       name="hotel.maxCapacity"
                       onChange={handleChange}
-                      placeholder="Preencha com o numero total"
+                      placeholder="Número aproximado"
                     />
                   </div>
 
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="hotel.wantEvent" className="text-lg">
-                      Estaria interessado(a) em colaborar com o estádio algarve
-                      como espaço complementar, oferecendo a organização de
-                      eventos de maior dimensão
+                      Estariam interessados em colaborar com o Estádio Algarve
+                      como espaço complementar, para a organização de eventos de
+                      maior dimensão?
                     </Label>
                     <div className="grid gap-1.5 items-center inquiry-check">
                       <div className="form-control w-full">
@@ -109,7 +160,7 @@ export function SpecifQuestion({
                           htmlFor="yes-hotel.wantEvent"
                           className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                         >
-                          Sim, gostaria de mais informações.
+                          Sim, gostaria de receber mais informações.
                         </label>
                       </div>
                       <div className="form-control w-full">
@@ -126,7 +177,7 @@ export function SpecifQuestion({
                           htmlFor="maybe-hotel.wantEvent"
                           className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                         >
-                          Não tenho certeza, gostaria de discutir mais.
+                          Talvez, estou interessado(a) em saber mais detalhes.
                         </label>
                       </div>
                       <div className="form-control w-full">
@@ -143,72 +194,75 @@ export function SpecifQuestion({
                           htmlFor="no-hotel.wantEvent"
                           className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                         >
-                          Não.
+                          Não, obrigado(a).
                         </label>
                       </div>
                     </div>
                   </div>
                 </>
               )}
-              <div className="form-control w-full mt-10">
-                <Label htmlFor="hotel.hasInterest" className="text-lg">
-                  O seu hotel teria interesse em desenvolver uma parceria com o
-                  Estádio Algarve e oferecer este serviço adicional?
-                </Label>
-                <div className="grid gap-1.5 items-center inquiry-check">
-                  <div className="form-control w-full">
-                    <input
-                      type="radio"
-                      name="hotel.hasInterest"
-                      value="1"
-                      id="yes-hotel.hasInterest"
-                      className="hidden"
-                      onChange={handleChange}
-                      checked={Number(formData.hotel?.hasInterest) === 1}
-                    />
-                    <label
-                      htmlFor="yes-hotel.hasInterest"
-                      className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                    >
-                      Sim, gostaria de mais informações.
-                    </label>
-                  </div>
-                  <div className="form-control w-full">
-                    <input
-                      type="radio"
-                      name="hotel.hasInterest"
-                      value="2"
-                      id="maybe-hotel.hasInterest"
-                      className="hidden"
-                      onChange={handleChange}
-                      checked={Number(formData.hotel?.hasInterest) === 2}
-                    />
-                    <label
-                      htmlFor="maybe-hotel.hasInterest"
-                      className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                    >
-                      Não tenho certeza, gostaria de discutir mais.
-                    </label>
-                  </div>
-                  <div className="form-control w-full">
-                    <input
-                      type="radio"
-                      name="hotel.hasInterest"
-                      value="3"
-                      id="no-hotel.hasInterest"
-                      className="hidden"
-                      onChange={handleChange}
-                      checked={Number(formData.hotel?.hasInterest) === 3}
-                    />
-                    <label
-                      htmlFor="no-hotel.hasInterest"
-                      className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                    >
-                      Não.
-                    </label>
+              {Number(formData.hotel?.hasSpace) === 2 && (
+                <div className="form-control w-full mt-10">
+                  <Label htmlFor="hotel.hasInterest" className="text-lg">
+                    Caso não tenham espaço próprio para a organização de
+                    eventos, teriam interesse em desenvolver uma parceria com o
+                    Estádio Algarve, integrando este serviço na vossa oferta?
+                  </Label>
+                  <div className="grid gap-1.5 items-center inquiry-check">
+                    <div className="form-control w-full">
+                      <input
+                        type="radio"
+                        name="hotel.hasInterest"
+                        value="1"
+                        id="yes-hotel.hasInterest"
+                        className="hidden"
+                        onChange={handleChange}
+                        checked={Number(formData.hotel?.hasInterest) === 1}
+                      />
+                      <label
+                        htmlFor="yes-hotel.hasInterest"
+                        className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
+                      >
+                        Sim, gostaria de receber mais informações.
+                      </label>
+                    </div>
+                    <div className="form-control w-full">
+                      <input
+                        type="radio"
+                        name="hotel.hasInterest"
+                        value="2"
+                        id="maybe-hotel.hasInterest"
+                        className="hidden"
+                        onChange={handleChange}
+                        checked={Number(formData.hotel?.hasInterest) === 2}
+                      />
+                      <label
+                        htmlFor="maybe-hotel.hasInterest"
+                        className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
+                      >
+                        Talvez, estou interessado(a) em saber mais detalhes.
+                      </label>
+                    </div>
+                    <div className="form-control w-full">
+                      <input
+                        type="radio"
+                        name="hotel.hasInterest"
+                        value="3"
+                        id="no-hotel.hasInterest"
+                        className="hidden"
+                        onChange={handleChange}
+                        checked={Number(formData.hotel?.hasInterest) === 3}
+                      />
+                      <label
+                        htmlFor="no-hotel.hasInterest"
+                        className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
+                      >
+                        Não, obrigado(a).
+                      </label>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </>
         );
@@ -217,7 +271,7 @@ export function SpecifQuestion({
           <>
             <div className="grid w-full  items-center gap-1.5 mt-5">
               <Label htmlFor="entityName" className="text-lg">
-                A sua empresa organiza eventos corporativos regularmente?
+                A tua empresa organiza eventos corporativos regularmente?
               </Label>
 
               <div className="grid gap-1.5 items-center inquiry-check">
@@ -261,7 +315,8 @@ export function SpecifQuestion({
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="hotel.wantEvent" className="text-lg">
-                      Que tipo de eventos?
+                      Se sim, que tipo de eventos a tua empresa costuma
+                      organizar?
                     </Label>
                     <div className="grid gap-1.5 items-center inquiry-check">
                       <div className="form-control w-full">
@@ -365,9 +420,8 @@ export function SpecifQuestion({
               )}
               <div className="form-control w-full mt-10">
                 <Label htmlFor="empresa.hasInterest" className="text-lg">
-                  Teria interesse em receber mais informações do Estádio Algarve
-                  relativamente à oferta de espaços para organização de eventos
-                  diferenciados?
+                  Tens interesse em saber mais sobre o que o Estádio Algarve
+                  pode oferecer para a organização de eventos únicos?
                 </Label>
                 <div className="grid gap-1.5 items-center inquiry-check">
                   <div className="form-control w-full">
@@ -384,7 +438,7 @@ export function SpecifQuestion({
                       htmlFor="yes-empresa.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Sim, gostaria de mais informações.
+                      Sim, gostaria de receber mais informações.
                     </label>
                   </div>
                   <div className="form-control w-full">
@@ -401,7 +455,7 @@ export function SpecifQuestion({
                       htmlFor="maybe-empresa.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Não tenho certeza, gostaria de discutir mais.
+                      Talvez, gostaria de obter mais detalhes.
                     </label>
                   </div>
                   <div className="form-control w-full">
@@ -418,7 +472,7 @@ export function SpecifQuestion({
                       htmlFor="no-empresa.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Não.
+                      Não, obrigado(a).
                     </label>
                   </div>
                 </div>
@@ -431,7 +485,8 @@ export function SpecifQuestion({
           <>
             <div className="grid w-full  items-center gap-1.5 mt-5">
               <Label htmlFor="produtora.organizeEvents" className="text-lg">
-                Já organizou algum evento de grande dimensão no Estádio Algarve?
+                Já organizaste algum evento de grande dimensão no Estádio
+                Algarve?
               </Label>
 
               <div className="grid gap-1.5 items-center inquiry-check">
@@ -475,104 +530,30 @@ export function SpecifQuestion({
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="produtora.wantEvent" className="text-lg">
-                      Que tipo de eventos?
+                      Se sim, que tipo de evento?
                     </Label>
                     <div className="grid gap-1.5 items-center inquiry-check">
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="produtora.typeOfEvents"
-                          value="1"
-                          id="teambuilding.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.produtora?.typeOfEvents.includes(
-                            (1).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="teambuilding.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Teambuilding
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="produtora.typeOfEvents"
-                          value="2"
-                          id="eventos.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.produtora?.typeOfEvents.includes(
-                            (2).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="eventos.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Eventos com Clientes
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="produtora.typeOfEvents"
-                          value="3"
-                          id="seminario.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.produtora?.typeOfEvents.includes(
-                            (3).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="seminario.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Seminários.
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="produtora.typeOfEvents"
-                          value="4"
-                          id="lancamento.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.produtora?.typeOfEvents.includes(
-                            (4).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="lancamento.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Lançamentos de Produtos/Marcas/Serviços
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="produtora.typeOfEvents"
-                          value="5"
-                          id="outros.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.produtora?.typeOfEvents.includes(
-                            (5).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="outros.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Outros
-                        </label>
-                      </div>
+                      {optionsProdutora.map((option) => (
+                        <div className="form-control w-full" key={option.id}>
+                          <input
+                            type="checkbox"
+                            name="produtora.typeOfEvents"
+                            value={option.value}
+                            id={option.id + ".typeOfEvents"}
+                            className="hidden"
+                            onChange={handleChange}
+                            checked={formData.produtora?.typeOfEvents.includes(
+                              option.value.toString()
+                            )}
+                          />
+                          <label
+                            htmlFor={option.id + ".typeOfEvents"}
+                            className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
+                          >
+                            {option.name}
+                          </label>
+                        </div>
+                      ))}
                     </div>
                   </div>
                   <div className="form-control w-full mt-10">
@@ -580,13 +561,13 @@ export function SpecifQuestion({
                       htmlFor="produtora.numberOfParticipants"
                       className="text-lg"
                     >
-                      Com que número de participantes?
+                      Quantos participantes teve esse evento?
                     </Label>
                     <Input
                       type="number"
                       name="produtora.numberOfParticipants"
                       onChange={handleChange}
-                      placeholder="Preencha com o numero total"
+                      placeholder="Número aproximado"
                       defaultValue={formData.produtora?.numberOfParticipants}
                     />
                   </div>
@@ -594,8 +575,8 @@ export function SpecifQuestion({
               )}
               <div className="form-control w-full mt-10">
                 <Label htmlFor="produtora.hasInterest" className="text-lg">
-                  Teria interesse em estabelecer uma parceria com o Estádio
-                  Algarve para organização de eventos?
+                  Tens interesse em estabelecer uma parceria com o Estádio
+                  Algarve para produção de eventos?
                 </Label>
                 <div className="grid gap-1.5 items-center inquiry-check">
                   <div className="form-control w-full">
@@ -612,7 +593,7 @@ export function SpecifQuestion({
                       htmlFor="yes-produtora.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Sim, gostaria de mais informações.
+                      Sim, quero receber mais informações.
                     </label>
                   </div>
                   <div className="form-control w-full">
@@ -629,7 +610,7 @@ export function SpecifQuestion({
                       htmlFor="maybe-produtora.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Não tenho certeza, gostaria de discutir mais.
+                      Talvez, gostaria de ter mais detalhes.
                     </label>
                   </div>
                   <div className="form-control w-full">
@@ -646,7 +627,7 @@ export function SpecifQuestion({
                       htmlFor="no-produtora.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Não.
+                      Não, obrigado/a.
                     </label>
                   </div>
                 </div>
@@ -814,7 +795,7 @@ export function SpecifQuestion({
                       type="number"
                       name="orgEventos.numberOfParticipants"
                       onChange={handleChange}
-                      placeholder="Preencha com o numero total"
+                      placeholder="Número aproximado"
                       defaultValue={formData.orgEventos?.numberOfParticipants}
                     />
                   </div>
@@ -887,7 +868,7 @@ export function SpecifQuestion({
           <>
             <div className="grid w-full  items-center gap-1.5 mt-5">
               <Label htmlFor="entPublicas.organizeEvents" className="text-lg">
-                Já organizou algum evento no Estádio Algarve?
+                Já organizaste algum evento no Estádio Algarve?
               </Label>
 
               <div className="grid gap-1.5 items-center inquiry-check">
@@ -931,118 +912,46 @@ export function SpecifQuestion({
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="entPublicas.wantEvent" className="text-lg">
-                      Que tipo de eventos?
+                      Se sim, que tipo de evento?
                     </Label>
+
                     <div className="grid gap-1.5 items-center inquiry-check">
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="entPublicas.typeOfEvents"
-                          value="1"
-                          id="teambuilding.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.entPublicas?.typeOfEvents.includes(
-                            (1).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="teambuilding.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Teambuilding
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="entPublicas.typeOfEvents"
-                          value="2"
-                          id="eventos.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.entPublicas?.typeOfEvents.includes(
-                            (2).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="eventos.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Eventos com Clientes
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="entPublicas.typeOfEvents"
-                          value="3"
-                          id="seminario.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.entPublicas?.typeOfEvents.includes(
-                            (3).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="seminario.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Seminários.
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="entPublicas.typeOfEvents"
-                          value="4"
-                          id="lancamento.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.entPublicas?.typeOfEvents.includes(
-                            (4).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="lancamento.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Lançamentos de Produtos/Marcas/Serviços
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="entPublicas.typeOfEvents"
-                          value="5"
-                          id="outros.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.entPublicas?.typeOfEvents.includes(
-                            (5).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="outros.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Outros
-                        </label>
-                      </div>
+                      {optionsEntidadePublica.map((option) => (
+                        <div className="form-control w-full" key={option.id}>
+                          <input
+                            type="checkbox"
+                            name="entPublicas.typeOfEvents"
+                            value={option.value}
+                            id={option.id + ".typeOfEvents"}
+                            className="hidden"
+                            onChange={handleChange}
+                            checked={formData.entPublicas?.typeOfEvents.includes(
+                              option.value.toString()
+                            )}
+                          />
+                          <label
+                            htmlFor={option.id + ".typeOfEvents"}
+                            className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
+                          >
+                            {option.name}
+                          </label>
+                        </div>
+                      ))}
                     </div>
+                   
                   </div>
                   <div className="form-control w-full mt-10">
                     <Label
                       htmlFor="entPublicas.numberOfParticipants"
                       className="text-lg"
                     >
-                      Com que número de participantes?
+                      Quantos participantes teve esse evento?
                     </Label>
                     <Input
                       type="number"
                       name="entPublicas.numberOfParticipants"
                       onChange={handleChange}
-                      placeholder="Preencha com o numero total"
+                      placeholder="Número aproximado"
                       defaultValue={formData.entPublicas?.numberOfParticipants}
                     />
                   </div>
@@ -1050,8 +959,8 @@ export function SpecifQuestion({
               )}
               <div className="form-control w-full mt-10">
                 <Label htmlFor="entPublicas.hasInterest" className="text-lg">
-                  Teria interesse em estabelecer uma parceria com o Estádio
-                  Algarve para organização de eventos?
+                  Tens interesse em estabelecer uma parceria com o Estádio
+                  Algarve para produção de eventos?
                 </Label>
                 <div className="grid gap-1.5 items-center inquiry-check">
                   <div className="form-control w-full">
@@ -1068,7 +977,7 @@ export function SpecifQuestion({
                       htmlFor="yes-entPublicas.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Sim, gostaria de mais informações.
+                      Sim, quero receber mais informações.
                     </label>
                   </div>
                   <div className="form-control w-full">
@@ -1085,7 +994,7 @@ export function SpecifQuestion({
                       htmlFor="maybe-entPublicas.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Não tenho certeza, gostaria de discutir mais.
+                      Talvez, gostaria de ter mais detalhes.
                     </label>
                   </div>
                   <div className="form-control w-full">
@@ -1102,7 +1011,7 @@ export function SpecifQuestion({
                       htmlFor="no-entPublicas.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Não.
+                      Não, obrigado/a.
                     </label>
                   </div>
                 </div>
@@ -1115,7 +1024,7 @@ export function SpecifQuestion({
           <>
             <div className="grid w-full  items-center gap-1.5 mt-5">
               <Label htmlFor="associacao.organizeEvents" className="text-lg">
-                Já organizou algum evento no Estádio Algarve?
+                Já organizaste algum evento no Estádio Algarve?
               </Label>
 
               <div className="grid gap-1.5 items-center inquiry-check">
@@ -1159,118 +1068,46 @@ export function SpecifQuestion({
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="associacao.wantEvent" className="text-lg">
-                      Que tipo de eventos?
+                      Se sim, que tipo de evento?
                     </Label>
+
                     <div className="grid gap-1.5 items-center inquiry-check">
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="associacao.typeOfEvents"
-                          value="1"
-                          id="teambuilding.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.associacao?.typeOfEvents.includes(
-                            (1).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="teambuilding.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Teambuilding
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="associacao.typeOfEvents"
-                          value="2"
-                          id="eventos.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.associacao?.typeOfEvents.includes(
-                            (2).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="eventos.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Eventos com Clientes
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="associacao.typeOfEvents"
-                          value="3"
-                          id="seminario.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.associacao?.typeOfEvents.includes(
-                            (3).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="seminario.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Seminários.
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="associacao.typeOfEvents"
-                          value="4"
-                          id="lancamento.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.associacao?.typeOfEvents.includes(
-                            (4).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="lancamento.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Lançamentos de Produtos/Marcas/Serviços
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="associacao.typeOfEvents"
-                          value="5"
-                          id="outros.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.associacao?.typeOfEvents.includes(
-                            (5).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="outros.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Outros
-                        </label>
-                      </div>
+                      {optionsAssociacao.map((option) => (
+                        <div className="form-control w-full" key={option.id}>
+                          <input
+                            type="checkbox"
+                            name="associacao.typeOfEvents"
+                            value={option.value}
+                            id={option.id + ".typeOfEvents"}
+                            className="hidden"
+                            onChange={handleChange}
+                            checked={formData.associacao?.typeOfEvents.includes(
+                              option.value.toString()
+                            )}
+                          />
+                          <label
+                            htmlFor={option.id + ".typeOfEvents"}
+                            className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
+                          >
+                            {option.name}
+                          </label>
+                        </div>
+                      ))}
                     </div>
+
                   </div>
                   <div className="form-control w-full mt-10">
                     <Label
                       htmlFor="associacao.numberOfParticipants"
                       className="text-lg"
                     >
-                      Com que número de participantes?
+                      Quantos participantes teve esse evento?
                     </Label>
                     <Input
                       type="number"
                       name="associacao.numberOfParticipants"
                       onChange={handleChange}
-                      placeholder="Preencha com o numero total"
+                      placeholder="Número aproximado"
                       defaultValue={formData.associacao?.numberOfParticipants}
                     />
                   </div>
@@ -1278,8 +1115,8 @@ export function SpecifQuestion({
               )}
               <div className="form-control w-full mt-10">
                 <Label htmlFor="associacao.hasInterest" className="text-lg">
-                  Teria interesse em estabelecer uma parceria com o Estádio
-                  Algarve para organização de eventos?
+                  Tens interesse em estabelecer uma parceria com o Estádio
+                  Algarve para a organização de eventos?
                 </Label>
                 <div className="grid gap-1.5 items-center inquiry-check">
                   <div className="form-control w-full">
@@ -1296,7 +1133,7 @@ export function SpecifQuestion({
                       htmlFor="yes-associacao.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Sim, gostaria de mais informações.
+                      Sim, quero receber mais informações.
                     </label>
                   </div>
                   <div className="form-control w-full">
@@ -1313,7 +1150,7 @@ export function SpecifQuestion({
                       htmlFor="maybe-associacao.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Não tenho certeza, gostaria de discutir mais.
+                      Talvez, gostaria de ter mais detalhes.
                     </label>
                   </div>
                   <div className="form-control w-full">
@@ -1330,7 +1167,7 @@ export function SpecifQuestion({
                       htmlFor="no-associacao.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Não.
+                      Não, obrigado/a.
                     </label>
                   </div>
                 </div>
@@ -1343,7 +1180,7 @@ export function SpecifQuestion({
           <>
             <div className="grid w-full  items-center gap-1.5 mt-5">
               <Label htmlFor="particular.organizeEvents" className="text-lg">
-                Já organizou algum evento no Estádio Algarve?
+                Já organizaste algum evento no Estádio Algarve?
               </Label>
 
               <div className="grid gap-1.5 items-center inquiry-check">
@@ -1387,118 +1224,46 @@ export function SpecifQuestion({
                 <>
                   <div className="form-control w-full mt-10">
                     <Label htmlFor="particular.wantEvent" className="text-lg">
-                      Que tipo de eventos?
+                      Se sim, que tipo de evento?
                     </Label>
+
                     <div className="grid gap-1.5 items-center inquiry-check">
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="particular.typeOfEvents"
-                          value="1"
-                          id="teambuilding.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.particular?.typeOfEvents.includes(
-                            (1).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="teambuilding.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Teambuilding
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="particular.typeOfEvents"
-                          value="2"
-                          id="eventos.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.particular?.typeOfEvents.includes(
-                            (2).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="eventos.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Eventos com Clientes
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="particular.typeOfEvents"
-                          value="3"
-                          id="seminario.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.particular?.typeOfEvents.includes(
-                            (3).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="seminario.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Seminários.
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="particular.typeOfEvents"
-                          value="4"
-                          id="lancamento.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.particular?.typeOfEvents.includes(
-                            (4).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="lancamento.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Lançamentos de Produtos/Marcas/Serviços
-                        </label>
-                      </div>
-                      <div className="form-control w-full">
-                        <input
-                          type="checkbox"
-                          name="particular.typeOfEvents"
-                          value="5"
-                          id="outros.typeOfEvents"
-                          className="hidden"
-                          onChange={handleChange}
-                          checked={formData.particular?.typeOfEvents.includes(
-                            (5).toString()
-                          )}
-                        />
-                        <label
-                          htmlFor="outros.typeOfEvents"
-                          className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
-                        >
-                          Outros
-                        </label>
-                      </div>
+                      {optionsParticular.map((option) => (
+                        <div className="form-control w-full" key={option.id}>
+                          <input
+                            type="checkbox"
+                            name="particular.typeOfEvents"
+                            value={option.value}
+                            id={option.id + ".typeOfEvents"}
+                            className="hidden"
+                            onChange={handleChange}
+                            checked={formData.particular?.typeOfEvents.includes(
+                              option.value.toString()
+                            )}
+                          />
+                          <label
+                            htmlFor={option.id + ".typeOfEvents"}
+                            className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
+                          >
+                            {option.name}
+                          </label>
+                        </div>
+                      ))}
                     </div>
+                    
                   </div>
                   <div className="form-control w-full mt-10">
                     <Label
                       htmlFor="particular.numberOfParticipants"
                       className="text-lg"
                     >
-                      Com que número de participantes?
+                      Quantos participantes teve esse evento?
                     </Label>
                     <Input
                       type="number"
                       name="particular.numberOfParticipants"
                       onChange={handleChange}
-                      placeholder="Preencha com o numero total"
+                      placeholder="Número aproximado"
                       defaultValue={formData.particular?.numberOfParticipants}
                     />
                   </div>
@@ -1506,8 +1271,8 @@ export function SpecifQuestion({
               )}
               <div className="form-control w-full mt-10">
                 <Label htmlFor="particular.hasInterest" className="text-lg">
-                  Teria interesse em estabelecer uma parceria com o Estádio
-                  Algarve para organização de eventos?
+                  Se ainda não organizaste, gostarias de saber mais sobre como
+                  realizar um evento no Estádio Algarve?
                 </Label>
                 <div className="grid gap-1.5 items-center inquiry-check">
                   <div className="form-control w-full">
@@ -1524,7 +1289,7 @@ export function SpecifQuestion({
                       htmlFor="yes-particular.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Sim, gostaria de mais informações.
+                      Sim, desejo receber mais informações.
                     </label>
                   </div>
                   <div className="form-control w-full">
@@ -1541,7 +1306,7 @@ export function SpecifQuestion({
                       htmlFor="maybe-particular.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Não tenho certeza, gostaria de discutir mais.
+                      Talvez, estou interessado(a) em obter mais detalhes.
                     </label>
                   </div>
                   <div className="form-control w-full">
@@ -1558,7 +1323,7 @@ export function SpecifQuestion({
                       htmlFor="no-particular.hasInterest"
                       className="custom-check text-lg font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 border p-4 rounded-lg w-full block cursor-pointer transition-colors"
                     >
-                      Não.
+                      Não, obrigado(a).
                     </label>
                   </div>
                 </div>

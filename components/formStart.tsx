@@ -50,7 +50,7 @@ export default function FormStart() {
       ],
     };
 
-    const tagId = parseInt(data.entity) + 5;   
+    const tagId = parseInt(data.entity) + 5;
 
     try {
       const createContact = await createNewContact(userData);
@@ -81,7 +81,8 @@ export default function FormStart() {
       <h4></h4>
       <div className="flex items-center space-x-2">
         <label className="text-white w-full text-sm">
-          Preencha os campos abaixo, para comerçarmos:
+         <span className="font-bold"> Rápido e fácil, vamos começar?
+         </span>
           <Controller
             name="entity"
             control={control}
@@ -92,8 +93,9 @@ export default function FormStart() {
                 onValueChange={(value) => field.onChange(value)} // Mudança aqui para usar onValueChange
                 value={field.value}
               >
-                <SelectTrigger className="w-full px-3 py-4 flex-1 h-15 mt-4 text-black">
-                  <SelectValue placeholder="Que tipo de entidade representas?" />
+              <SelectTrigger className={`w-full px-3 py-4 flex-1 h-15 mt-4 text-black ${errors.entity ? "border-red-500" : ""}`}>
+
+                  <SelectValue placeholder="Que tipo de entidade representas?*" />
                 </SelectTrigger>
                 <SelectContent>
                   {options.map((option) => (
@@ -114,11 +116,11 @@ export default function FormStart() {
           <Input
             {...register("email", { required: true })}
             type="email"
-            placeholder="Insere aqui o teu email profissional"
-            className="w-full px-3 py-4 flex-1 h-15 mt-4 text-black "
+            placeholder="Insere aqui o teu email profissional*"
+            className={`w-full px-3 py-4 flex-1 h-15 mt-4 text-black ${errors.email ? "border-red-500" : ""}`}
             required
           ></Input>
-          {errors.email && <span>Campo obrigatório</span>}
+          {errors.email && <span>E-mail obrigatório</span>}
         </label>
       </div>
 
@@ -133,8 +135,8 @@ export default function FormStart() {
           htmlFor="rgpd"
           className="text-xs text-white font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          Autorizo a recolha e tratamento dos meus dados pessoais no âmbito do
-          Estadio do Algarve e em conformidade com o RGPD.
+          Sim, autorizo a recolha e o tratamento dos meus dados pessoais pelo
+          Estádio do Algarve, em conformidade com o RGPD.
         </label>
       </div>
       <div className="flex items-center space-x-2 mt-3 font-light">
@@ -149,7 +151,11 @@ export default function FormStart() {
           className="text-xs text-white font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
           Li e aceito a{" "}
-          <Link href="/" className="underline">
+          <Link
+            href="https://corporate.estadioalgarve.pt/"
+            className="underline"
+            target="_blank"
+          >
             Política de Privacidade e Proteção de Dados
           </Link>
         </label>

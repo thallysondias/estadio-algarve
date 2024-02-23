@@ -55,7 +55,7 @@ export interface InquiryFormProps {
     entPublicas?: entPublicas;
     associacao?: associacao;
     particular?: particular;
-    avaliation?: string;
+    avaliation?: string | number;
     additionalComments?: string;
   };
 }

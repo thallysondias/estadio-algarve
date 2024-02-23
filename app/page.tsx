@@ -10,14 +10,15 @@ export default function Home() {
         <Header></Header>
         <div>
           <h2 className=" text-white text-xl md:text-3xl mt-8 font-semibold">
-            <span className="block text-3xl md:text-5xl font-bold ">
-              Bem-vindo/a,
-            </span>
-            Participa e ganha prémios!
+            Estamos a celebrar 20 anos de histórias e conquistas no Estádio
+            Algarve e queremos que faças parte desta celebração. 🎉
           </h2>
-          <p className="text-white text-lg md:text-xl mt-8">
-            Preenche o formulário abaixo, responde a um pequeno questionário e
-            ganha prémios que podes levantar no stand do Estádio Algarve.
+          <p className="text-white  md:text-lg mt-8">
+            Dedica-nos apenas 2 minutos do teu tempo para responder a um breve
+            inquérito e, como forma de agradecimento, receberás um brinde
+            comemorativo exclusivo dos 20 anos do estádio. Todos os
+            participantes serão premiados! Juntos, vamos elevar o Estádio
+            Algarve a ser o epicentro dos maiores eventos da região.
           </p>
           {/*  <ul className="text-white list-disc text-lg md:text-xl list-inside mt-8">
             <li>Eventos Memoráveis</li>

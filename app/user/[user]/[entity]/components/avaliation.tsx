@@ -17,11 +17,10 @@ export function Avaliation({
     <div>
       <div className="grid w-full  items-center gap-1.5 mt-5">
         <Label htmlFor="entityName" className="text-lg">
-          Avalie de 0 a 9 qual a probabilidade de organizar um evento no Estádio
-          Algarve no próximo ano.
+        Na tua opinião, qual é a probabilidade de organizares um evento no Estádio Algarve no próximo ano? 
         </Label>
         <span className="text-sm italic text-gray-600">
-          Onde 0 é pouco provavél e 9 muito provavél.
+        0 é pouco provável e 9 é muito provável
         </span>
 
         <div className="grid grid-cols-10 gap-1.5 items-center inquiry-check">
@@ -50,9 +49,7 @@ export function Avaliation({
             Comentários Adicionais:
           </Label>
           <span className="text-sm italic text-gray-600">
-            Por favor, utilize este espaço para partilhar qualquer outra
-            informação relevante sobre o seu interesse em organizar eventos no
-            Estádio Algarve.
+          Este espaço é teu! Partilha connosco qualquer informação adicional que consideres relevante sobre o teu interesse em realizar eventos no Estádio Algarve.
           </span>
           <Input
             id="additionalComments"
