@@ -1,8 +1,8 @@
-export async function getContact() {
+export async function getContact(userId: string) {
   try {
     const headers = buildHeaders();
     const res = await fetch(
-      "https://api.egoiapp.com/lists/1/contacts/8ab339b662",
+     `https://api.egoiapp.com/lists/1/contacts/${userId}`,
       {
         method: "GET",
         headers: headers,

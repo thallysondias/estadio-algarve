@@ -332,7 +332,6 @@ export default function RegistedUser({
 
     console.log(userData);
     try {
-      console.log(user);
       const update = await updateSpecifcContact(userData, user);
       console.log(update);
     } catch (error) {

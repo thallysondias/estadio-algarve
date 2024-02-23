@@ -57,19 +57,22 @@ export default function FormStart() {
       let user;
       if (createContact.status === 409) {
         user = createContact.errors?.contacts[0];
+        router.push(`/user/${user}`);
       } else {
         user = createContact.contact_id;
+
+        const userNewTag: userNewTag = {
+          contacts: [user],
+          tag_id: tagId,
+        };
+  
+        await attachTag(userNewTag);
+  
+        console.log("Utilizador:" + user);
+        router.push(`/user/${user}/${data.entity}`);
       }
 
-      const userNewTag: userNewTag = {
-        contacts: [user],
-        tag_id: tagId,
-      };
-
-      await attachTag(userNewTag);
-
-      console.log("Utilizador:" + user);
-      router.push(`/user/${user}/${data.entity}`);
+     
     } catch (error) {
       console.error("Erro:", error);
       setIsLoading(false);

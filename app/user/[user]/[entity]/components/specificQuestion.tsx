@@ -26,9 +26,6 @@ export function SpecifQuestion({
       Number(formData.particular?.hasInterest) !== 0);
 
   const entity = formData.entity;
-  console.log(formData.hotel?.hasInterest)
-  console.log(formData.hotel?.wantEvent)
-  console.log(formData.hotel?.maxCapacity)
 
   const optionsProdutora = [
     { id: "confSeminario", name: "Conferências e seminários", value: 1 },
