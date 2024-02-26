@@ -243,10 +243,7 @@ export default function RegistedUser({
           }, // Tipos de Evento
           {
             field_id: 15,
-            value:
-              Number(formData.produtora.numberOfParticipants) !== 0
-                ? [Number(formData.produtora.numberOfParticipants)]
-                : [],
+            value: Number(formData.produtora.numberOfParticipants)
           }, // Numero de Participantes
           {
             field_id: 16,
@@ -331,7 +328,10 @@ export default function RegistedUser({
           }, // Numero de Participantes
           {
             field_id: 24,
-            value: [Number(formData.entPublicas.hasInterest)],
+            value:
+              Number(formData.entPublicas.hasInterest) !== 0
+                ? [Number(formData.entPublicas.hasInterest)]
+                : [],
           }, // Interessado em desenvolver parceria
           {
             field_id: 34,
@@ -404,8 +404,6 @@ export default function RegistedUser({
           {
             field_id: 31,
             value: Number(formData.particular.numberOfParticipants)
-              ? Number(formData.particular.numberOfParticipants)
-              : 0,
           }, // Numero de Participantes
           {
             field_id: 36,
