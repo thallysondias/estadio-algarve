@@ -26,11 +26,14 @@ export function RecentRegister({ dataUser }: RecentRegisterProps) {
     fetchOptions();
   }, []);
 
-  const lastContacts = dataUser.items.slice(-10);
+
+  const lastContacts = dataUser.items.slice(0, -10);
+  const reversedContacts = [...dataUser.items].reverse().slice(-10);
 
   return (
     <div className="space-y-3">
-      {lastContacts.map((contact) => {
+      {reversedContacts.map((contact) => {
+        
         const extra = contact.extra ?? [];
         //const option = options.find(option => option.option_id === Number(contact.extra?[2].value));
         const entity = contact.extra?.find((e) => e.field_id === 1)?.value;
