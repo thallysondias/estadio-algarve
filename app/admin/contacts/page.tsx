@@ -4,11 +4,13 @@ import { getAllContacts } from "@/app/api/egoi/contacts/getAllContacts";
 import { getAllOptions } from "@/app/api/egoi/fields/fieldOptions"; // Certifique-se de ter essa importação
 import { UserData, OptionItem } from "@/lib/interface";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 
 export default function ContactsPage() {
   const [dataUser, setDataUser] = useState({ total_items: 0, items: [] });
   const [options, setOptions] = useState<OptionItem[]>([]); // Estado para armazenar as opções
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const getTagName = (tag: number) => {
     switch (tag) {
@@ -27,18 +29,20 @@ export default function ContactsPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getAllContacts();
-      setDataUser(response);
-
+      setIsLoading(true); // Inicia o carregamento
       try {
-        const optionsResponse = await getAllOptions(3); // Assumindo que as opções estão no campo com ID 3
+        const response = await getAllContacts();
+        setDataUser(response);
+        const optionsResponse = await getAllOptions(3);
         setOptions(optionsResponse.items);
       } catch (error) {
         console.error("Error fetching options:", error);
+      } finally {
+        setIsLoading(false); // Finaliza o carregamento
       }
     };
 
-    fetchData().catch(console.error);
+    fetchData();
   }, []);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,45 +57,49 @@ export default function ContactsPage() {
     <>
       <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex">
         total: {dataUser.total_items}
-        <input
+        <Input
           type="text"
           id="myInput"
           onChange={handleSearchChange}
           placeholder="Pesquise por email"
-          title="Type in a name"
-        />
-        <table id="myTable">
-          <thead>
-            <tr className="header">
-              <th>Email</th>
-     
-              <th>Entidade</th>
-              <th>Prémio</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredContacts.map((contact: UserData) => {
-              const optionValue = contact.extra?.find(
-                (e) => e.field_id === 3
-              )?.value; // Ajuste o field_id conforme necessário
-              const option = options.find(
-                (o) => o.option_id === Number(optionValue)
-              );
-              return (
-                <tr key={contact.base.contact_id}>
-                  <td>{contact.base.email}</td>
-                {/*   <td>{contact.base.first_name}</td> */}
-                  <td>{option ? option.pt : "Valor desconhecido"}</td>
-                  <td>
-                    {contact.tags?.map((tag: number) => (
-                      <span key={tag}>{getTagName(tag)}</span>
-                    ))}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        ></Input>
+        <input />
+        {isLoading ? (
+          <div>Carregando...</div>
+        ) : (
+          <table id="myTable">
+            <thead>
+              <tr className="header">
+                <th>Email</th>
+
+                <th>Entidade</th>
+                <th>Prémio</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredContacts.map((contact: UserData) => {
+                const optionValue = contact.extra?.find(
+                  (e) => e.field_id === 3
+                )?.value; // Ajuste o field_id conforme necessário
+                const option = options.find(
+                  (o) => o.option_id === Number(optionValue)
+                );
+                return (
+                  <tr key={contact.base.contact_id}>
+                    <td>{contact.base.email}</td>
+                    {/*   <td>{contact.base.first_name}</td> */}
+                    <td>{option ? option.pt : "Valor desconhecido"}</td>
+                    <td>
+                      {contact.tags?.map((tag: number) => (
+                        <span key={tag}>{getTagName(tag)}</span>
+                      ))}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </div>
     </>
   );
