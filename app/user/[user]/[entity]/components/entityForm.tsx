@@ -13,7 +13,7 @@ export function EntityForm({
     formData.entityName !== "" &&
     formData.position !== "" &&
     formData.personalName !== "" &&
-    formData.cellphone !== "" &&
+    formData.cellphone.length == 9 &&
     formData.postalCode.length >= 7;
 
   const formatPostalCode = (event: any) => {
