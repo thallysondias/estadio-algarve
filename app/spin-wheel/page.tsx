@@ -1,24 +1,53 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import LogosPartner from "@/components/footerLogos";
-//import WheelOfPrize from "@/components/wheelOfPrize";
+import { Wheel } from "react-custom-roulette";
 
-import dynamic from "next/dynamic";
+const data = [
+  {
+    option: "Caneta",
+    style: { backgroundColor: "#0F2E46", textColor: "#6CB8DA " },
+  },
+  {
+    option: "Bloco de Notas",
+    style: { backgroundColor: "#6CB8DA ", textColor: "#0F2E46" },
+  },
+  {
+    option: "T-Shirt",
+    style: { backgroundColor: "#F1803D ", textColor: "#0F2E46" },
+  },
+  {
+    option: "Cantil",
+    style: { backgroundColor: "#F3E04E  ", textColor: "#0F2E46" },
+  },
+  {
+    option: "Caneta",
+    style: { backgroundColor: "#0F2E46", textColor: "#6CB8DA " },
+  },
+  {
+    option: "Bloco de Notas",
+    style: { backgroundColor: "#6CB8DA ", textColor: "#0F2E46" },
+  },
+  {
+    option: "T-Shirt",
+    style: { backgroundColor: "#F1803D ", textColor: "#0F2E46" },
+  },
+  {
+    option: "Cantil",
+    style: { backgroundColor: "#F3E04E  ", textColor: "#0F2E46" },
+  },
+];
 
-export default function ThankYouPage() {
-  const WheelOfPrize = dynamic(() => import("@/components/wheelOfPrize"), {
-    ssr: false, // Desabilita a renderização no lado do servidor para este componente
-  });
-
-  const [tempoRestante, setTempoRestante] = useState(25);
-  const [prizeNumber, setPrizeNumber] = useState(null);
-
-
-  const onPrizeSelected = (number: any) => {
-    console.log("Número do prémio:", number);
-    setPrizeNumber(number);
+export default function SpinWheel() {
+  const [mustSpin, setMustSpin] = useState(false);
+  const [prizeNumber, setPrizeNumber] = useState(0);
+  const handleSpinClick = () => {
+    if (!mustSpin) {
+      const newPrizeNumber = Math.floor(Math.random() * data.length);
+      setPrizeNumber(newPrizeNumber);
+      setMustSpin(true);
+    }
   };
 
   return (
@@ -49,7 +78,30 @@ export default function ThankYouPage() {
             Não fiques de fora, a tua sorte espera por ti! 
           </p>
           <div className="flex justify-center w-full mt-10">
-            <WheelOfPrize onPrizeSelect={onPrizeSelected} />
+            <div>
+              <Wheel
+                mustStartSpinning={mustSpin}
+                prizeNumber={prizeNumber}
+                data={data}
+                backgroundColors={["#3e3e3e", "#df3428"]}
+                outerBorderColor={"#f2f2f2"}
+                radiusLineColor={"#f2f2f2"}
+                onStopSpinning={() => {
+                  console.log("Premio:" + prizeNumber);
+                  setMustSpin(false);
+                }}
+              />
+              {!mustSpin ? (
+                <button
+                  onClick={handleSpinClick}
+                  className="bg-secondary p-3 font-bold rounded text-white mt-5"
+                >
+                  GIRAR RODA DOS PRÉMIOS
+                </button>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         </div>
       </div>
