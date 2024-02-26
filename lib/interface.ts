@@ -6,7 +6,7 @@ interface PushToken {
 interface ExtraField {
   field_id: number;
   format?: string;
-  value: string | number[] | number;
+  value?: string | number[] | number | string[] ;
 }
 interface BaseInfo {
   contact_id?: string; // Agora é opcional
@@ -15,6 +15,7 @@ interface BaseInfo {
   last_name?: string;
   birth_date?: string; // Supondo que este também possa ser opcional
   language?: string;
+  subscription_date?: string | Date;
   email?: string;
   cellphone?: string;
   phone?: string;
@@ -27,6 +28,21 @@ export interface UserData {
   contacts?: string[];
   base: BaseInfo;
   extra?: ExtraField[];
+}
+export interface AllContacts{
+  total_items: number;
+  items: UserData[]
+}
+
+export interface OptionItem {
+  option_id: number;
+  en: string;
+  pt: string;
+  br: string;
+  es: string;
+  de: string;
+  hu: string;
+  fr: string;
 }
 
 export interface InquiryFormProps {
