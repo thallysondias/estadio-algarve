@@ -2,12 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
+import Link from "next/link";
 import LogosPartner from "@/components/footerLogos";
 import WheelOfPrize from "@/components/wheelOfPrize";
-import Link from "next/link";
 
 import { attachTag } from "@/app/api/egoi/tags/attachTag";
-
 import { userNewTag } from "@/lib/interface";
 
 export default function ThankYouPage({
@@ -18,39 +17,12 @@ export default function ThankYouPage({
   const user = params.user;
   const [tempoRestante, setTempoRestante] = useState(25);
   const [prizeNumber, setPrizeNumber] = useState(null);
+  const [mustSpinAgain, setMustSpinAgain] = useState(false);
 
   const router = useRouter();
 
   useEffect(() => {
     if (prizeNumber !== null) {
-      console.log("entrou");
-
-      const handleAttachTag = async () => {
-        let prizeTag;
-
-        if ([0, 4].includes(prizeNumber)) {
-          prizeTag = 13;
-        } else if ([1, 5].includes(prizeNumber)) {
-          prizeTag = 14;
-        } else if ([2, 6].includes(prizeNumber)) {
-          prizeTag = 15;
-        } else if ([3, 7].includes(prizeNumber)) {
-          prizeTag = 16;
-        }
-
-        if (prizeTag) {
-          const userNewTag: userNewTag = {
-            contacts: [user],
-            tag_id: prizeTag,
-          };
-          try {
-            await attachTag(userNewTag);
-          } catch (error) {
-            console.error("Erro ao anexar tag:", error);
-          }
-        }
-      };
-      handleAttachTag();
 
       const intervalId = setInterval(() => {
         // Atualizar o tempo restante a cada segundo
@@ -58,7 +30,8 @@ export default function ThankYouPage({
       }, 1000);
 
       const redirectTimeout = setTimeout(() => {
-        router.push("/");
+        setMustSpinAgain(false)
+        router.push("/spin-wheel");
       }, 25000);
 
       return () => {
@@ -66,7 +39,7 @@ export default function ThankYouPage({
         clearTimeout(redirectTimeout);
       };
     }
-  }, [prizeNumber, router]);
+  }, [prizeNumber, router]); 
 
   const onPrizeSelected = (number: any) => {
     console.log("Número do Prêmio:", number);
@@ -102,18 +75,16 @@ export default function ThankYouPage({
             Não fiques de fora, a tua sorte espera por ti! 🎁
           </p>
           <div className="flex justify-center w-full mt-10">
-            <WheelOfPrize onPrizeSelect={onPrizeSelected} />
+               <WheelOfPrize onPrizeSelect={onPrizeSelected} mustSpin={mustSpinAgain} />
           </div>
           {/*  o seu prémio é: {prizeNumber !== null ? prizeNumber : "Aguardando..."} */}
-          {prizeNumber !== null ? (
+         {/*  {prizeNumber !== null ? (
             <p className="text-center italic bg-slate-900 p-4 inline-block mt-10 rounded text-white text-sm ">
-              <Link href="/">
-                Redirecionando em {tempoRestante} segundos...
-              </Link>
+             <Link href="/spin-wheel"> Novo giro em {tempoRestante} segundos...</Link>
             </p>
           ) : (
             <></>
-          )}
+          )} */}
         </div>
       </div>
       <LogosPartner />

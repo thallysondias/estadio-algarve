@@ -44,8 +44,8 @@ export default async function DashboardPage() {
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList className=" bg-slate-200">
             <TabsTrigger value="overview">Geral</TabsTrigger>
-            <TabsTrigger value="analytics" disabled>
-              
+            <TabsTrigger value="analytics">
+              Entidades
             </TabsTrigger>
            {/*  <TabsTrigger value="reports" disabled>
               Reports
