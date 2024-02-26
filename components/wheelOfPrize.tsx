@@ -61,7 +61,7 @@ export default function WheelOfPrize({ onPrizeSelect }: any) {
         onStopSpinning={() => {
           console.log("Premio:" + prizeNumber);
           onPrizeSelect(prizeNumber);
-          setMustSpin(false);
+          //setMustSpin(false);
         }}
       />
       {!mustSpin ? (

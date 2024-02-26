@@ -28,7 +28,7 @@ export default async function User({
           <p className="mt-3">
             Podes levantar o teu prémio diretamente no nosso stand no Estádio
             Algarve. Basta mostrares o email ou o número de telemóvel que usaste
-            para participar no inquérito.{" "}
+            para participar no inquérito.
           </p>
           <div className="bg-white rounded w-64 mx-auto mt-10 p-5 text-center">
             <Image
@@ -41,7 +41,7 @@ export default async function User({
             <h3 className="text-black text-lg"> 1x Caneta</h3>
           </div>
           
-          <Link href="/" className="mt-10 bg-secondary p-3 rounded inline-block">Voltar a página inicial</Link>
+          <Link href="/" className="mt-5 bg-secondary p-3 rounded inline-block">Voltar a página inicial</Link>
         </div>
       </div>
       <LogosPartner />
