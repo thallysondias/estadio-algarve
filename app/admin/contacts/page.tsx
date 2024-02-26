@@ -1,28 +1,51 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { getAllContacts } from "@/app/api/egoi/contacts/getAllContacts";
-import { UserData } from "@/lib/interface";
+import { getAllOptions } from "@/app/api/egoi/fields/fieldOptions"; // Certifique-se de ter essa importação
+import { UserData, OptionItem } from "@/lib/interface";
 import { Badge } from "@/components/ui/badge";
 
-export default function TaskPage() {
+export default function ContactsPage() {
   const [dataUser, setDataUser] = useState({ total_items: 0, items: [] });
+  const [options, setOptions] = useState<OptionItem[]>([]); // Estado para armazenar as opções
   const [searchTerm, setSearchTerm] = useState("");
+
+  const getTagName = (tag: number) => {
+    switch (tag) {
+      case 13:
+        return "T-shirt";
+      case 14:
+        return "Cantil";
+      case 15:
+        return "Bloco de Notas";
+      case 16:
+        return "Caneta";
+      default:
+        return "";
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await getAllContacts();
       setDataUser(response);
+
+      try {
+        const optionsResponse = await getAllOptions(3); // Assumindo que as opções estão no campo com ID 3
+        setOptions(optionsResponse.items);
+      } catch (error) {
+        console.error("Error fetching options:", error);
+      }
     };
 
     fetchData().catch(console.error);
   }, []);
 
-  const handleSearchChange = (event: any) => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.toUpperCase());
   };
 
   const filteredContacts = dataUser.items.filter((contact: UserData) => {
-    // Utilize o operador lógico OR para lidar com possíveis valores undefined
     return (contact.base.email?.toUpperCase() || "").includes(searchTerm);
   });
 
@@ -42,24 +65,31 @@ export default function TaskPage() {
             <tr className="header">
               <th>Email</th>
               <th>Nome</th>
+              <th>Entidade</th>
+              <th>Prémio</th>
             </tr>
           </thead>
           <tbody>
-            {filteredContacts.map((contact: UserData) => (
-              <tr key={contact.base.contact_id}>
-                <td>{contact.base.email}</td>
-                <td>{contact.base.first_name}</td>
-                <td>
-                  <Badge variant="outline">
-                  {contact.extra?.[0]?.value ?? 'N/A'}
-                  </Badge>
-                </td>
-                <td>
-                  
-                </td>
-                {/* Assumindo que você vai substituir por um valor relevante */}
-              </tr>
-            ))}
+            {filteredContacts.map((contact: UserData) => {
+              const optionValue = contact.extra?.find(
+                (e) => e.field_id === 3
+              )?.value; // Ajuste o field_id conforme necessário
+              const option = options.find(
+                (o) => o.option_id === Number(optionValue)
+              );
+              return (
+                <tr key={contact.base.contact_id}>
+                  <td>{contact.base.email}</td>
+                  <td>{contact.base.first_name}</td>
+                  <td>{option ? option.pt : "Valor desconhecido"}</td>
+                  <td>
+                    {contact.tags?.map((tag: number) => (
+                      <span key={tag}>{getTagName(tag)}</span>
+                    ))}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

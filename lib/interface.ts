@@ -28,6 +28,7 @@ export interface UserData {
   contacts?: string[];
   base: BaseInfo;
   extra?: ExtraField[];
+  tags?:[];
 }
 export interface AllContacts{
   total_items: number;
