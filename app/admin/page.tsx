@@ -45,14 +45,14 @@ export default async function DashboardPage() {
           <TabsList className=" bg-slate-200">
             <TabsTrigger value="overview">Geral</TabsTrigger>
             <TabsTrigger value="analytics" disabled>
-              Analytics
+              
             </TabsTrigger>
-            <TabsTrigger value="reports" disabled>
+           {/*  <TabsTrigger value="reports" disabled>
               Reports
             </TabsTrigger>
             <TabsTrigger value="notifications" disabled>
               Notifications
-            </TabsTrigger>
+            </TabsTrigger> */}
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
