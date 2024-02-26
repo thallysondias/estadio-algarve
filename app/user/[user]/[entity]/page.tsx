@@ -157,7 +157,10 @@ export default function RegistedUser({
         specificFields = [
           {
             field_id: 6,
-            value: [Number(formData.hotel.hasSpace)],
+            value:
+              Number(formData.hotel.hasSpace) !== 0
+                ? [Number(formData.hotel.hasSpace)]
+                : [],
           }, // Possui espaço para eventos
           {
             field_id: 7,
@@ -165,11 +168,17 @@ export default function RegistedUser({
           }, // Capacidade Maxima
           {
             field_id: 8,
-            value: [Number(formData.hotel.wantEvent)],
+            value:
+              Number(formData.hotel.wantEvent) !== 0
+                ? [Number(formData.hotel.wantEvent)]
+                : [],
           }, // Interessado em Colaborar
           {
             field_id: 9,
-            value: Number(formData.hotel.hasInterest) !== 0 ? [Number(formData.hotel.hasInterest)] : [],
+            value:
+              Number(formData.hotel.hasInterest) !== 0
+                ? [Number(formData.hotel.hasInterest)]
+                : [],
           }, // Interessado em desenvolver parceria
         ];
         break;
@@ -178,7 +187,10 @@ export default function RegistedUser({
         specificFields = [
           {
             field_id: 10,
-            value: [Number(formData.empresa.organizeEvents)],
+            value:
+              Number(formData.empresa.organizeEvents) !== 0
+                ? [Number(formData.empresa.organizeEvents)]
+                : [],
           }, // Possui espaço para eventos
           {
             field_id: 11,
@@ -186,7 +198,10 @@ export default function RegistedUser({
           }, // Tipos de Evento
           {
             field_id: 12,
-            value: Number(formData.hotel.hasInterest) !== 0 ? [Number(formData.empresa.hasInterest)] : [],
+            value:
+              Number(formData.hotel.hasInterest) !== 0
+                ? [Number(formData.empresa.hasInterest)]
+                : [],
           }, // Interessado em desenvolver parceria
         ];
         break;
@@ -195,7 +210,10 @@ export default function RegistedUser({
         specificFields = [
           {
             field_id: 13,
-            value: [Number(formData.produtora.organizeEvents)],
+            value:
+              Number(formData.produtora.organizeEvents) !== 0
+                ? [Number(formData.produtora.organizeEvents)]
+                : [],
           }, // Possui espaço para eventos
           {
             field_id: 37, //correção
@@ -203,11 +221,17 @@ export default function RegistedUser({
           }, // Tipos de Evento
           {
             field_id: 15,
-            value: Number(formData.produtora.numberOfParticipants),
+            value:
+              Number(formData.produtora.numberOfParticipants) !== 0
+                ? [Number(formData.produtora.numberOfParticipants)]
+                : [],
           }, // Numero de Participantes
           {
             field_id: 16,
-            value: [Number(formData.produtora.hasInterest)],
+            value:
+              Number(formData.produtora.hasInterest) !== 0
+                ? [Number(formData.produtora.hasInterest)]
+                : [],
           }, // Interessado em desenvolver parceria
         ];
         break;
@@ -228,7 +252,10 @@ export default function RegistedUser({
           }, // Numero de Participantes
           {
             field_id: 20,
-            value: [Number(formData.orgEventos.hasInterest)],
+            value:
+              Number(formData.orgEventos.hasInterest) !== 0
+                ? [Number(formData.orgEventos.hasInterest)]
+                : [],
           }, // Interessado em desenvolver parceria
         ];
         break;
