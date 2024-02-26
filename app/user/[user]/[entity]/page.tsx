@@ -72,7 +72,7 @@ export default function RegistedUser({
       numberOfParticipants: 0,
       hasInterest: null,
     },
-    avaliation: 0,
+    avaliation: 1,
     additionalComments: "",
   });
 
@@ -451,7 +451,9 @@ export default function RegistedUser({
         }, // Tipo de Entidade
         {
           field_id: 4,
-          value: [Number(formData.avaliation)],
+          value: Number(formData.avaliation) !== 0
+          ? [Number(formData.avaliation)]
+          : [1],
         }, // Possibilidade de Organizar um evento
         {
           field_id: 5,
