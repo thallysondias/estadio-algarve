@@ -88,14 +88,14 @@ export default function ThankYouPage({
           <p className="mt-5">
             <span className="font-semibold">
               Agora, não percas a oportunidade de ganhar no nosso sorteio.
-            </span>{" "}
-            Roda a sorte e descobre imediatamente o prémio que tens à  tua
+            </span>
+            Roda a sorte e descobre imediatamente o prémio que tens à tua
             espera!
           </p>
           <p className="mt-3">
-            Podes levantar o teu prÃ©mio diretamente no nosso stand no EstÃ¡dio
-            Algarve. Basta mostrares o email ou o nÃºmero de telemÃ³vel que usaste
-            para participar no inquérito.{" "}
+            Podes levantar o teu prémio diretamente no nosso stand no Estádio
+            Algarve. Basta mostrares o email ou o número de telemóvel que usaste
+            para participar no inquérito.
           </p>
           <p className="mt-3">
             Não fiques de fora, a tua sorte espera por ti! 
@@ -103,7 +103,6 @@ export default function ThankYouPage({
           <div className="flex justify-center w-full mt-10">
                <WheelOfPrize onPrizeSelect={onPrizeSelected} />
           </div>
-          {/*  o seu prÃ©mio Ã©: {prizeNumber !== null ? prizeNumber : "Aguardando..."} */}
           {prizeNumber !== null ? (
             <p className="text-center italic bg-slate-900 p-4 inline-block mt-10 rounded text-white text-sm ">
               Redirecionando em {tempoRestante} segundos...
