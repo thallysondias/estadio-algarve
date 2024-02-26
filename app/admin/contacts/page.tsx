@@ -57,14 +57,14 @@ export default function ContactsPage() {
           type="text"
           id="myInput"
           onChange={handleSearchChange}
-          placeholder="Search for names.."
+          placeholder="Pesquise por email"
           title="Type in a name"
         />
         <table id="myTable">
           <thead>
             <tr className="header">
               <th>Email</th>
-              <th>Nome</th>
+     
               <th>Entidade</th>
               <th>Prémio</th>
             </tr>
@@ -80,7 +80,7 @@ export default function ContactsPage() {
               return (
                 <tr key={contact.base.contact_id}>
                   <td>{contact.base.email}</td>
-                  <td>{contact.base.first_name}</td>
+                {/*   <td>{contact.base.first_name}</td> */}
                   <td>{option ? option.pt : "Valor desconhecido"}</td>
                   <td>
                     {contact.tags?.map((tag: number) => (
