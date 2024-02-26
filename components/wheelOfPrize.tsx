@@ -4,7 +4,7 @@ import { Wheel } from "react-custom-roulette";
 
 const data = [
   {
-    option: "Caneta",
+    option: "Caneta", 
     style: { backgroundColor: "#0F2E46", textColor: "#6CB8DA " },
   },
   {
@@ -61,10 +61,8 @@ export default function WheelOfPrize({ onPrizeSelect }: any) {
         onStopSpinning={() => {
           console.log("Premio:" + prizeNumber);
           onPrizeSelect(prizeNumber);
-          setMustSpin(false);
         }}
       />
-
       {!mustSpin ? (
         <button
           onClick={handleSpinClick}
