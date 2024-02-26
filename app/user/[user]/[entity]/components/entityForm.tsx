@@ -90,7 +90,7 @@ export function EntityForm({
           defaultValue={formData.cellphone}
           type="number"
           onChange={handleChange}
-          maxLength={9}
+          pattern="\d{9}"
           required
         />
         <span className="text-sm italic  text-gray-600">

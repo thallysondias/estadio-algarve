@@ -180,6 +180,13 @@ export default function RegistedUser({
                 ? [Number(formData.hotel.hasInterest)]
                 : [],
           }, // Interessado em desenvolver parceria
+          {
+            field_id: 35,
+            value:
+              Number(formData.hotel.hasInterest) !== 0
+                ? [Number(formData.hotel.hasInterest)]
+                : [],
+          }, // INTERESSE EM PARCERIA GERAL
         ];
         break;
       //Empresa
@@ -199,10 +206,24 @@ export default function RegistedUser({
           {
             field_id: 12,
             value:
-              Number(formData.hotel.hasInterest) !== 0
+              Number(formData.empresa.hasInterest) !== 0
                 ? [Number(formData.empresa.hasInterest)]
                 : [],
           }, // Interessado em desenvolver parceria
+          {
+            field_id: 34,
+            value:
+              Number(formData.empresa.typeOfEvents) !== 0
+                ? [Number(formData.empresa.typeOfEvents)]
+                : [],
+          }, // TIPOS DE EVENTOS GERAL
+          {
+            field_id: 35,
+            value:
+              Number(formData.empresa.hasInterest) !== 0
+                ? [Number(formData.empresa.hasInterest)]
+                : [],
+          }, // INTERESSE EM PARCERIA GERAL
         ];
         break;
       //Produtoras
@@ -233,6 +254,20 @@ export default function RegistedUser({
                 ? [Number(formData.produtora.hasInterest)]
                 : [],
           }, // Interessado em desenvolver parceria
+          {
+            field_id: 34,
+            value:
+              Number(formData.produtora.typeOfEvents) !== 0
+                ? [Number(formData.produtora.typeOfEvents)]
+                : [],
+          }, // TIPOS DE EVENTOS GERAL
+          {
+            field_id: 35,
+            value:
+              Number(formData.produtora.hasInterest) !== 0
+                ? [Number(formData.produtora.hasInterest)]
+                : [],
+          }, // INTERESSE EM PARCERIA GERAL
         ];
         break;
       //Org de Eventos
@@ -240,10 +275,10 @@ export default function RegistedUser({
         specificFields = [
           {
             field_id: 17,
-            value:  Number(formData.orgEventos.organizeEvents) !== 0
-            ? [Number(formData.orgEventos.organizeEvents)]
-            : [],
-           
+            value:
+              Number(formData.orgEventos.organizeEvents) !== 0
+                ? [Number(formData.orgEventos.organizeEvents)]
+                : [],
           }, // Ja organizou Eventos?
           {
             field_id: 18,
@@ -260,6 +295,20 @@ export default function RegistedUser({
                 ? [Number(formData.orgEventos.hasInterest)]
                 : [],
           }, // Interessado em desenvolver parceria
+          {
+            field_id: 34,
+            value:
+              Number(formData.orgEventos.typeOfEvents) !== 0
+                ? [Number(formData.orgEventos.typeOfEvents)]
+                : [],
+          }, // TIPOS DE EVENTOS GERAL
+          {
+            field_id: 35,
+            value:
+              Number(formData.orgEventos.hasInterest) !== 0
+                ? [Number(formData.orgEventos.hasInterest)]
+                : [],
+          }, // INTERESSE EM PARCERIA GERAL
         ];
         break;
       //Entidades Publicas
@@ -281,6 +330,20 @@ export default function RegistedUser({
             field_id: 24,
             value: [Number(formData.entPublicas.hasInterest)],
           }, // Interessado em desenvolver parceria
+          {
+            field_id: 34,
+            value:
+              Number(formData.entPublicas.typeOfEvents) !== 0
+                ? [Number(formData.entPublicas.typeOfEvents)]
+                : [],
+          }, // TIPOS DE EVENTOS GERAL
+          {
+            field_id: 35,
+            value:
+              Number(formData.entPublicas.hasInterest) !== 0
+                ? [Number(formData.entPublicas.hasInterest)]
+                : [],
+          }, // INTERESSE EM PARCERIA GERAL
         ];
         break;
       //Associações
@@ -301,8 +364,21 @@ export default function RegistedUser({
           {
             field_id: 28,
             value: [Number(formData.associacao.hasInterest)],
-            
           }, // Interessado em desenvolver parceria
+          {
+            field_id: 34,
+            value:
+              Number(formData.associacao.typeOfEvents) !== 0
+                ? [Number(formData.associacao.typeOfEvents)]
+                : [],
+          }, // TIPOS DE EVENTOS GERAL
+          {
+            field_id: 35,
+            value:
+              Number(formData.associacao.hasInterest) !== 0
+                ? [Number(formData.associacao.hasInterest)]
+                : [],
+          }, // INTERESSE EM PARCERIA GERAL
         ];
         break;
       //Particular
@@ -310,14 +386,14 @@ export default function RegistedUser({
         specificFields = [
           {
             field_id: 29,
-            value:  Number(formData.particular.organizeEvents) !== 0
-            ? [Number(formData.particular.organizeEvents)]
-            : [],           
+            value:
+              Number(formData.particular.organizeEvents) !== 0
+                ? [Number(formData.particular.organizeEvents)]
+                : [],
           }, // Possui espaço para eventos
           {
             field_id: 30,
             value: formData.particular.typeOfEvents.map(Number),
-           
             /*   value: formData.particular.typeOfEvents ? formData.particular.typeOfEvents.map(Number) : 0 , */
           }, // Tipos de Evento
           {
@@ -328,10 +404,26 @@ export default function RegistedUser({
           }, // Numero de Participantes
           {
             field_id: 36,
-            value:  Number(formData.particular.hasInterest) !== 0
-            ? [Number(formData.particular.hasInterest)]
-            : [],  
+            value:
+              Number(formData.particular.hasInterest) !== 0
+                ? [Number(formData.particular.hasInterest)]
+                : [],
           }, // Interessado em desenvolver parceria
+          {
+            field_id: 34,
+            value:
+              Number(formData.particular.typeOfEvents) !== 0
+                ? [Number(formData.particular.typeOfEvents)]
+                : [],
+          }, // TIPOS DE EVENTOS GERAL
+          {
+            field_id: 35,
+            value:
+              Number(formData.particular.hasInterest) !== 0
+                ? [Number(formData.particular.hasInterest)]
+                : [],
+          }, // INTERESSE EM PARCERIA GERAL
+          
         ];
         break;
     }
