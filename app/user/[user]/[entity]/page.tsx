@@ -213,8 +213,9 @@ export default function RegistedUser({
           {
             field_id: 34,
             value:
-              Number(formData.empresa.typeOfEvents) !== 0
-                ? [Number(formData.empresa.typeOfEvents)]
+              formData.empresa.typeOfEvents &&
+              formData.empresa.typeOfEvents.length > 0
+                ? formData.empresa.typeOfEvents.map(Number)
                 : [],
           }, // TIPOS DE EVENTOS GERAL
           {
@@ -257,8 +258,9 @@ export default function RegistedUser({
           {
             field_id: 34,
             value:
-              Number(formData.produtora.typeOfEvents) !== 0
-                ? [Number(formData.produtora.typeOfEvents)]
+              formData.produtora.typeOfEvents &&
+              formData.produtora.typeOfEvents.length > 0
+                ? formData.produtora.typeOfEvents.map(Number)
                 : [],
           }, // TIPOS DE EVENTOS GERAL
           {
@@ -298,8 +300,9 @@ export default function RegistedUser({
           {
             field_id: 34,
             value:
-              Number(formData.orgEventos.typeOfEvents) !== 0
-                ? [Number(formData.orgEventos.typeOfEvents)]
+              formData.orgEventos.typeOfEvents &&
+              formData.produtora.typeOfEvents.length > 0
+                ? formData.orgEventos.typeOfEvents.map(Number)
                 : [],
           }, // TIPOS DE EVENTOS GERAL
           {
@@ -333,8 +336,9 @@ export default function RegistedUser({
           {
             field_id: 34,
             value:
-              Number(formData.entPublicas.typeOfEvents) !== 0
-                ? [Number(formData.entPublicas.typeOfEvents)]
+              formData.entPublicas.typeOfEvents &&
+              formData.produtora.typeOfEvents.length > 0
+                ? formData.entPublicas.typeOfEvents.map(Number)
                 : [],
           }, // TIPOS DE EVENTOS GERAL
           {
@@ -368,8 +372,9 @@ export default function RegistedUser({
           {
             field_id: 34,
             value:
-              Number(formData.associacao.typeOfEvents) !== 0
-                ? [Number(formData.associacao.typeOfEvents)]
+              formData.associacao.typeOfEvents &&
+              formData.produtora.typeOfEvents.length > 0
+                ? formData.associacao.typeOfEvents.map(Number)
                 : [],
           }, // TIPOS DE EVENTOS GERAL
           {
@@ -412,8 +417,9 @@ export default function RegistedUser({
           {
             field_id: 34,
             value:
-              Number(formData.particular.typeOfEvents) !== 0
-                ? [Number(formData.particular.typeOfEvents)]
+              formData.particular.typeOfEvents &&
+              formData.produtora.typeOfEvents.length > 0
+                ? formData.particular.typeOfEvents.map(Number)
                 : [],
           }, // TIPOS DE EVENTOS GERAL
           {
@@ -423,7 +429,6 @@ export default function RegistedUser({
                 ? [Number(formData.particular.hasInterest)]
                 : [],
           }, // INTERESSE EM PARCERIA GERAL
-          
         ];
         break;
     }
