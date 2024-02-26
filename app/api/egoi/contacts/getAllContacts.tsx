@@ -2,10 +2,11 @@ export async function getAllContacts() {
   try {
     const headers = buildHeaders();
     const res = await fetch(
-     `https://api.egoiapp.com/lists/1/contacts`,
+     `https://api.egoiapp.com/lists/1/contacts?limit=1000`,
       {
         method: "GET",
         headers: headers,
+        next: { revalidate: 10 },
       }
     );
     if (!res.ok) {

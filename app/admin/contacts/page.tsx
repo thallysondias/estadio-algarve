@@ -1,37 +1,68 @@
-import { promises as fs } from "fs";
-import path from "path";
-import { Metadata } from "next";
-import Image from "next/image";
-import { z } from "zod";
+"use client";
+import React, { useState, useEffect } from "react";
 import { getAllContacts } from "@/app/api/egoi/contacts/getAllContacts";
 import { UserData } from "@/lib/interface";
+import { Badge } from "@/components/ui/badge";
 
-/* import { columns } from "./components/columns"
-import { DataTable } from "./components/data-table"
-import { taskSchema } from "./data/schema" */
+export default function TaskPage() {
+  const [dataUser, setDataUser] = useState({ total_items: 0, items: [] });
+  const [searchTerm, setSearchTerm] = useState("");
 
-export const metadata: Metadata = {
-  title: "Tasks",
-  description: "A task and issue tracker build using Tanstack Table.",
-};
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getAllContacts();
+      setDataUser(response);
+    };
 
+    fetchData().catch(console.error);
+  }, []);
 
-export default async function TaskPage() {
-  const dataUser = await getAllContacts();
-  console.log(dataUser)
+  const handleSearchChange = (event: any) => {
+    setSearchTerm(event.target.value.toUpperCase());
+  };
+
+  const filteredContacts = dataUser.items.filter((contact: UserData) => {
+    // Utilize o operador lógico OR para lidar com possíveis valores undefined
+    return (contact.base.email?.toUpperCase() || "").includes(searchTerm);
+  });
 
   return (
     <>
       <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex">
-        total:
-        {dataUser.total_items}
-        {dataUser.items.map((contact: UserData) => (
-          <div key={contact.base.contact_id}>
-            user: {contact.base.email}
-          </div>
-        ))}
+        total: {dataUser.total_items}
+        <input
+          type="text"
+          id="myInput"
+          onChange={handleSearchChange}
+          placeholder="Search for names.."
+          title="Type in a name"
+        />
+        <table id="myTable">
+          <thead>
+            <tr className="header">
+              <th>Email</th>
+              <th>Nome</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredContacts.map((contact: UserData) => (
+              <tr key={contact.base.contact_id}>
+                <td>{contact.base.email}</td>
+                <td>{contact.base.first_name}</td>
+                <td>
+                  <Badge variant="outline">
+                  {contact.extra?.[0]?.value ?? 'N/A'}
+                  </Badge>
+                </td>
+                <td>
+                  
+                </td>
+                {/* Assumindo que você vai substituir por um valor relevante */}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   );
-  
 }

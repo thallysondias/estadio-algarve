@@ -240,7 +240,10 @@ export default function RegistedUser({
         specificFields = [
           {
             field_id: 17,
-            value: [Number(formData.orgEventos.organizeEvents)],
+            value:  Number(formData.orgEventos.organizeEvents) !== 0
+            ? [Number(formData.orgEventos.organizeEvents)]
+            : [],
+           
           }, // Ja organizou Eventos?
           {
             field_id: 18,
@@ -298,19 +301,23 @@ export default function RegistedUser({
           {
             field_id: 28,
             value: [Number(formData.associacao.hasInterest)],
+            
           }, // Interessado em desenvolver parceria
         ];
         break;
-      //Associações
+      //Particular
       case 7:
         specificFields = [
           {
             field_id: 29,
-            value: [Number(formData.particular.organizeEvents)],
+            value:  Number(formData.particular.organizeEvents) !== 0
+            ? [Number(formData.particular.organizeEvents)]
+            : [],           
           }, // Possui espaço para eventos
           {
             field_id: 30,
             value: formData.particular.typeOfEvents.map(Number),
+           
             /*   value: formData.particular.typeOfEvents ? formData.particular.typeOfEvents.map(Number) : 0 , */
           }, // Tipos de Evento
           {
@@ -321,7 +328,9 @@ export default function RegistedUser({
           }, // Numero de Participantes
           {
             field_id: 36,
-            value: [Number(formData.particular.hasInterest)],
+            value:  Number(formData.particular.hasInterest) !== 0
+            ? [Number(formData.particular.hasInterest)]
+            : [],  
           }, // Interessado em desenvolver parceria
         ];
         break;
