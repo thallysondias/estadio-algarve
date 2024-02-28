@@ -27,8 +27,8 @@ export function RecentRegister({ dataUser }: RecentRegisterProps) {
   }, []);
 
 
-  const lastContacts = dataUser.items.slice(0, -10);
-  const reversedContacts = [...dataUser.items].reverse().slice(-10);
+  const lastContacts = dataUser.items.slice(0, -5);
+  const reversedContacts = [...dataUser.items].reverse().slice(-5);
 
   return (
     <div className="space-y-3">

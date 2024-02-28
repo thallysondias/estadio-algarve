@@ -298,7 +298,7 @@ export default function RegistedUser({
             field_id: 34,
             value:
               formData.orgEventos.typeOfEvents &&
-              formData.produtora.typeOfEvents.length > 0
+              formData.orgEventos.typeOfEvents.length > 0
                 ? formData.orgEventos.typeOfEvents.map(Number)
                 : [],
           }, // TIPOS DE EVENTOS GERAL
@@ -337,7 +337,7 @@ export default function RegistedUser({
             field_id: 34,
             value:
               formData.entPublicas.typeOfEvents &&
-              formData.produtora.typeOfEvents.length > 0
+              formData.entPublicas.typeOfEvents.length > 0
                 ? formData.entPublicas.typeOfEvents.map(Number)
                 : [],
           }, // TIPOS DE EVENTOS GERAL
@@ -373,7 +373,7 @@ export default function RegistedUser({
             field_id: 34,
             value:
               formData.associacao.typeOfEvents &&
-              formData.produtora.typeOfEvents.length > 0
+              formData.associacao.typeOfEvents.length > 0
                 ? formData.associacao.typeOfEvents.map(Number)
                 : [],
           }, // TIPOS DE EVENTOS GERAL

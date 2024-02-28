@@ -22,6 +22,7 @@ import { UserNav } from "@/app/examples/dashboard/components/user-nav" */
 
 import { getAllContacts } from "../api/egoi/contacts/getAllContacts";
 import { AllContacts } from "@/lib/interface";
+import Entitys from "./components/entitys";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -34,7 +35,7 @@ export default async function DashboardPage() {
 
   return (
     <>
-      <div className="flex-1 space-y-4 p-8 pt-6">
+      <div className="flex-1 space-y-4 p-8 pt-6 max-w-5xl mx-auto">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
           <div className="flex items-center space-x-2">
@@ -44,10 +45,8 @@ export default async function DashboardPage() {
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList className=" bg-slate-200">
             <TabsTrigger value="overview">Geral</TabsTrigger>
-            <TabsTrigger value="analytics">
-              Entidades
-            </TabsTrigger>
-           {/*  <TabsTrigger value="reports" disabled>
+            <TabsTrigger value="entitys">Entidades</TabsTrigger>
+            {/*  <TabsTrigger value="reports" disabled>
               Reports
             </TabsTrigger>
             <TabsTrigger value="notifications" disabled>
@@ -101,6 +100,9 @@ export default async function DashboardPage() {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+          <TabsContent value="entitys" className="space-y-4">
+            <Entitys dataUser={dataUser}></Entitys>
           </TabsContent>
         </Tabs>
       </div>

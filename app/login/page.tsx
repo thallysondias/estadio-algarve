@@ -35,7 +35,7 @@ export default function AuthenticationPage() {
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
-              <footer className="text-sm">2024 @ LS Consulting</footer>
+              <footer className="text-sm">2024 @ Lstrategy</footer>
             </blockquote>
           </div>
         </div>

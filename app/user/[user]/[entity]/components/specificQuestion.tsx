@@ -969,6 +969,7 @@ export function SpecifQuestion({
                       value="1"
                       id="yes-entPublicas.hasInterest"
                       className="hidden"
+                      hidden
                       onChange={handleChange}
                       checked={Number(formData.entPublicas?.hasInterest) === 1}
                     />

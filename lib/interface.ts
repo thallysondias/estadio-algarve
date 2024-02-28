@@ -124,3 +124,27 @@ export interface userNewTag {
   contacts: any[];
   tag_id: number;
 }
+
+export interface QuestionOption {
+  id: number;
+  value: number;
+  label: string;
+}
+
+export interface Question {
+  question_id: number;
+  question: string;
+  type: string;
+  options?: QuestionOption[];
+  value?: number;
+}
+
+export interface EntityQuestion {
+  entity: string | number;
+  entity_id: number;
+  questions: Question[];
+  question_id?: number;
+}
+export interface RecentRegisterProps {
+  dataUser: AllContacts;
+}
