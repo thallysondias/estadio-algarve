@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { getAllContacts } from "@/app/api/egoi/contacts/getAllContacts";
-import { getAllOptions } from "@/app/api/egoi/fields/fieldOptions"; // Certifique-se de ter essa importação
+import { getAllOptions } from "@/app/api/egoi/fields/fieldOptions"; 
 import { UserData, OptionItem } from "@/lib/interface";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -22,6 +22,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { PaginationDemo } from "./components/PaginationDemo";
 
 interface PaginationDemoProps {
   currentPage: number;
@@ -145,62 +146,5 @@ export default function ContactsPage() {
         </>
       )}
     </div>
-  );
-}
-
-// Componente de Paginação
-export function PaginationDemo({
-  currentPage,
-  totalItems,
-  itemsPerPage,
-  onPageChange,
-}: PaginationDemoProps) {
-  const pageCount = Math.ceil(totalItems / itemsPerPage);
-
-  const handlePrevious = () => onPageChange(Math.max(1, currentPage - 1));
-  const handleNext = () => onPageChange(Math.min(pageCount, currentPage + 1));
-
-  let pagesToShow: PageItemType[] = [1];
-  if (currentPage > 2) {
-    pagesToShow.push("...");
-  }
-  if (currentPage > 1 && currentPage < pageCount) {
-    pagesToShow.push(currentPage - 1);
-    pagesToShow.push(currentPage);
-    if (currentPage + 1 < pageCount) pagesToShow.push(currentPage + 1);
-  }
-  if (currentPage < pageCount - 1 && pageCount - currentPage > 2) {
-    pagesToShow.push("...");
-  }
-  if (pageCount !== 1) {
-    pagesToShow.push(pageCount);
-  }
-
-  return (
-    <Pagination>
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious href="#" onClick={handlePrevious} />
-        </PaginationItem>
-        {pagesToShow.map((page, index) => (
-          <PaginationItem key={typeof page === "number" ? page : index}>
-            {page === "..." ? (
-              <PaginationEllipsis />
-            ) : (
-              <PaginationLink
-                href="#"
-                onClick={() => onPageChange(page)}
-                isActive={currentPage === page}
-              >
-                {page}
-              </PaginationLink>
-            )}
-          </PaginationItem>
-        ))}
-        <PaginationItem>
-          <PaginationNext href="#" onClick={handleNext} />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
   );
 }
