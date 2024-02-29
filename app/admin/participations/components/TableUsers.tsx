@@ -84,7 +84,7 @@ export default function TableUser({
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <div className="grid gap-4 mt-10">
+    <div className="grid gap-4 mt-12">
       <div className="flex items-center justify-between space-y-2">
         <h2 className="text-2xl font-bold tracking-tight">Contactos</h2>
       </div>

@@ -28,6 +28,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { questions } from "@/lib/questions";
 import TableUser from "./TableUsers";
+import Comments from "./Comments";
 
 const renderChartsForEntity = (
   entityId: any,
@@ -272,12 +273,10 @@ export default function ParticipationByEntity({
               )}
             </div>
 
-            <TableUser entityUsers={entityUsers}></TableUser>
+            <TableUser entityUsers={entityUsers} />
 
+            <Comments entityUsers={entityUsers} />
           </TabsContent>
-
-
-
         );
       })}
     </>
