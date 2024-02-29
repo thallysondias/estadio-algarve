@@ -14,6 +14,9 @@
   background-position: 50% 0;
   background-size: cover;
 }
+.table-fixed-header th, .table-fixed-header td {
+  width: 20%; /* Ajuste a largura conforme o número de colunas */
+}
 
 @layer base {
   :root {

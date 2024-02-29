@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
 export default async function DashboardPage() {
   const dataUser: AllContacts = await getAllContacts();
-  console.log(dataUser);
+  //console.log(dataUser);
 
   return (
     <>
@@ -45,7 +45,7 @@ export default async function DashboardPage() {
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList className=" bg-slate-200">
             <TabsTrigger value="overview">Geral</TabsTrigger>
-            <TabsTrigger value="entitys">Entidades</TabsTrigger>
+          {/*   <TabsTrigger value="entitys">Entidades</TabsTrigger> */}
             {/*  <TabsTrigger value="reports" disabled>
               Reports
             </TabsTrigger>
@@ -101,9 +101,9 @@ export default async function DashboardPage() {
               </Card>
             </div>
           </TabsContent>
-          <TabsContent value="entitys" className="space-y-4">
+         {/*  <TabsContent value="entitys" className="space-y-4">
             <Entitys dataUser={dataUser}></Entitys>
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
       </div>
     </>

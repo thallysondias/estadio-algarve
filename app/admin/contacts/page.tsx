@@ -13,24 +13,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-import { PaginationDemo } from "./components/PaginationDemo";
 
-interface PaginationDemoProps {
-  currentPage: number;
-  totalItems: number;
-  itemsPerPage: number;
-  onPageChange: (page: number) => void;
-}
-type PageItemType = number | "...";
+import { PaginationDemo } from "./components/PaginationDemo";
 
 export default function ContactsPage() {
   const [dataUser, setDataUser] = useState({ total_items: 0, items: [] });
@@ -92,7 +76,10 @@ export default function ContactsPage() {
 
   return (
     <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex max-w-5xl mx-auto">
-      total: {dataUser.total_items}
+      <div className="flex items-center justify-between space-y-2">
+        <h2 className="text-3xl font-bold tracking-tight">Contactos</h2>
+      </div>
+   {/*    total: {dataUser.total_items} */}
       <Input
         type="text"
         id="myInput"
@@ -110,6 +97,7 @@ export default function ContactsPage() {
                   <TableHead>Titulo</TableHead>
                   <TableHead>Entidade</TableHead>
                   <TableHead>Prémio</TableHead>
+                  <TableHead>Interesse</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -120,6 +108,11 @@ export default function ContactsPage() {
                   const option = options.find(
                     (o) => o.option_id === Number(optionValue)
                   );
+
+                  const intersseValue = contact.extra?.find(
+                    (e) => e.field_id === 35
+                  )?.value; // Ajuste o field_id conforme necessário
+                
                   return (
                     <TableRow key={contact.base.contact_id}>
                       <TableCell>{contact.base.email}</TableCell>
@@ -130,6 +123,9 @@ export default function ContactsPage() {
                         {contact.tags?.map((tag: number) => (
                           <span key={tag}>{getTagName(tag)}</span>
                         ))}
+                      </TableCell>
+                      <TableCell>
+                       {intersseValue}
                       </TableCell>
                     </TableRow>
                   );
