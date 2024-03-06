@@ -139,6 +139,7 @@ export default function OverviewParticipation({
               <Bar
                 dataKey="Participações"
                 fill="currentColor"
+                className="fill-primary"
                 radius={[4, 4, 0, 0]}
                 label={{ position: "top", fontSize:11 }}
               />

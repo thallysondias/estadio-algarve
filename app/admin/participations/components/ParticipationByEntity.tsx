@@ -24,16 +24,42 @@ import {
   Question,
 } from "@/lib/interface";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { questions } from "@/lib/questions";
 import TableUser from "./TableUsers";
 import Comments from "./Comments";
+import FilterUsers from "./FilterUsers";
+
+interface UserInformation {
+  name: string | undefined;
+  userEmail: string;
+  userCellphone: string;
+  entity: string | number | string[] | number[] | undefined;
+  entityName: string;
+  response: string;
+}
+interface DialogContent {
+  title: string;
+  description: string;
+  totalParticipation: number;
+  users: UserInformation[] | any; // Use the interface here
+}
 
 const renderChartsForEntity = (
-  entityId: any,
+  entityId: number,
   entityUsers: UserData[],
-  questions: EntityQuestion[]
+  questions: EntityQuestion[],
+  handleBarClick: any
 ) => {
   // Suas implementações de renderChartsForEntity e groupUsersByEntity
   const charts = questions.flatMap((question) => {
@@ -52,12 +78,6 @@ const renderChartsForEntity = (
           return (
             <Card key={`chart-${question.question_id}`}>
               <CardHeader>
-                {/*  <CardTitle>
-                  {
-                    questions.find((q) => q.entity_id === parseInt(entityId))
-                      ?.entity
-                  }
-                </CardTitle> */}
                 <CardDescription>{q.question}</CardDescription>
               </CardHeader>
               <CardContent className="pl-2">
@@ -82,6 +102,14 @@ const renderChartsForEntity = (
                       radius={[4, 4, 0, 0]}
                       className="fill-primary"
                       label={{ position: "top", fontSize: 11 }}
+                      onClick={(data, index) =>
+                        handleBarClick(
+                          data.name,
+                          q.question_id,
+                          entityUsers,
+                          questions
+                        )
+                      }
                     />
                     <Tooltip />
                   </BarChart>
@@ -196,6 +224,64 @@ export default function ParticipationByEntity({
   const usersWithExtraField33Count =
     countUsersWithExtraField35EqualToOneByEntity(dataUser.items);
 
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [dialogContent, setDialogContent] = useState<DialogContent>({
+    title: "",
+    description: "",
+    totalParticipation: 0,
+    users: [],
+  });
+
+  const handleBarClick = (
+    optionLabel: string,
+    questionId: number,
+    entityUsers: UserData[],
+    questions: EntityQuestion[]
+  ) => {
+    console.log("Clicked optionLabel:", optionLabel);
+    console.log("Clicked questionId:", questionId);
+
+    // Convert the label to its corresponding value
+    const questionDetails = questions
+      .flatMap((q) => q.questions)
+      .find((q) => q.question_id === questionId);
+    if (questionDetails?.options) {
+      const optionDetails = questionDetails?.options.find(
+        (opt) => opt.label === optionLabel
+      );
+      const filteredUsers = entityUsers.filter((user) =>
+        user.extra?.some(
+          (extra) =>
+            extra.field_id === questionId &&
+            Number(extra.value) === optionDetails?.value
+        )
+      );
+
+      const userInformation = filteredUsers.map((user) => ({
+        name: user.base?.first_name,
+        userEmail: user.base?.email,
+        userCellphone: user.base?.cellphone,
+        entity: user.extra?.find((extra) => extra.field_id === 3)?.value, // Adjust according to your data structure
+        entityName: user.extra?.[0]?.value,
+        response: optionLabel,
+      }));
+
+      // Update state to show dialog with dynamic content
+      setDialogContent({
+        title: questionDetails?.question,
+        description: `Opção: ${optionLabel}`,
+        totalParticipation: filteredUsers.length,
+        users: userInformation,
+      });
+      console.log("Dialog should open");
+      setIsDialogOpen(true);
+    }
+
+    // Assuming each user's answer is stored in a way that can be matched to questionId and option value
+
+    // Log desired information
+  };
+
   return (
     <>
       {Object.entries(usersGroupedByEntity).map(([entityId, entityUsers]) => {
@@ -269,10 +355,17 @@ export default function ParticipationByEntity({
               {renderChartsForEntity(
                 parseInt(entityId),
                 entityUsers,
-                questions
+                questions,
+                handleBarClick
               )}
             </div>
 
+            <FilterUsers
+              setIsDialogOpen={setIsDialogOpen}
+              isDialogOpen={isDialogOpen}
+              dialogContent={dialogContent}
+            />
+            
             <TableUser entityUsers={entityUsers} />
 
             <Comments entityUsers={entityUsers} />
