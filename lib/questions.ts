@@ -458,12 +458,11 @@ export const questions: EntityQuestion[] = [
         question: "Se sim, que tipo de evento?",
         type: "radio",
         options: [
-          { id: 1, label: "Evento Privado", value: 1 },
+          { id: 1, label: "Teambulding", value: 1 },
           { id: 2, label: "Celebração especial", value: 2 },
           { id: 3, label: "Casamento", value: 3 },
           { id: 4, label: "Batizado", value: 4 },
-          { id: 5, label: "Aniversário", value: 5 },
-          { id: 6, label: "Outro", value: 6 },
+          { id: 5, label: "Outros", value: 5 },
         ],
       },
       {
