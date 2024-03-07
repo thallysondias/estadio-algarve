@@ -40,7 +40,6 @@ import TableUser from "./TableUsers";
 import Comments from "./Comments";
 import FilterUsers from "./FilterUsers";
 
-
 interface UserInformation {
   name: string | undefined;
   userEmail: string;
@@ -110,7 +109,7 @@ const renderChartsForEntity = (
                           entityUsers,
                           questions
                         )
-                      } 
+                      }
                     />
                     <Tooltip />
                   </BarChart>
@@ -131,26 +130,25 @@ const renderChartsForEntity = (
 const groupUsersByEntity = (
   users: UserData[]
 ): { [entityValue: number]: UserData[] } => {
-  return users.reduce(
-    (acc: { [entityValue: number]: UserData[] }, user: UserData) => {
-      const entityField = user.extra?.find((field) => field.field_id === 3);
-      if (
-        entityField &&
-        Array.isArray(entityField.value) &&
-        entityField.value.length > 0
-      ) {
-        // Garantindo que entityValue seja um número.
-        const entityValue = Number(entityField.value[0]);
-        // Verificando se entityValue é um número válido antes de usá-lo como chave.
-        if (!isNaN(entityValue)) {
-          if (!acc[entityValue]) acc[entityValue] = [];
-          acc[entityValue].push(user);
-        }
+  return users.reduce((acc: { [entityValue: number]: UserData[] }, user: UserData) => {
+    const entityField = user.extra?.find((field) => field.field_id === 3);
+    // Adiciona condição para verificar se o usuário tem first_name
+    const hasFirstName = user.base?.first_name;
+
+    if (
+      entityField &&
+      Array.isArray(entityField.value) &&
+      entityField.value.length > 0 &&
+      hasFirstName // Verifica se o usuário possui um first_name não vazio
+    ) {
+      const entityValue = Number(entityField.value[0]);
+      if (!isNaN(entityValue)) {
+        if (!acc[entityValue]) acc[entityValue] = [];
+        acc[entityValue].push(user);
       }
-      return acc;
-    },
-    {}
-  );
+    }
+    return acc;
+  }, {});
 };
 
 const countAnswersByQuestion = (
@@ -241,6 +239,7 @@ export default function ParticipationByEntity({
   ) => {
     console.log("Clicked optionLabel:", optionLabel);
     console.log("Clicked questionId:", questionId);
+    console.log("Clicked questionId:", questionId);
 
     // Convert the label to its corresponding value
     const questionDetails = questions
@@ -250,20 +249,22 @@ export default function ParticipationByEntity({
       const optionDetails = questionDetails?.options.find(
         (opt) => opt.label === optionLabel
       );
-      const filteredUsers = entityUsers.filter((user) =>
-        user.extra?.some(
-          (extra) =>
-            extra.field_id === questionId &&
-            Number(extra.value) === optionDetails?.value
-        )
+      const filteredUsers = entityUsers.filter(
+        (user) =>
+          user.base?.first_name && // Verifica se o usuário tem um first_name não vazio
+          user.extra?.some(
+            (extra) =>
+              extra.field_id === questionId &&
+              Number(extra.value) === optionDetails?.value
+          )
       );
-      
+
       const userInformation = filteredUsers.map((user) => ({
         name: user.base?.first_name,
         userEmail: user.base?.email,
         userCellphone: user.base?.cellphone,
         entity: user.extra?.find((extra) => extra.field_id === 3)?.value, // Adjust according to your data structure
-        entityName:  user.extra?.[0]?.value,
+        entityName: user.extra?.[0]?.value,
         response: optionLabel,
       }));
 
@@ -275,8 +276,13 @@ export default function ParticipationByEntity({
         users: userInformation,
       });
       console.log("Dialog should open");
+      console.log(userInformation)
       setIsDialogOpen(true);
     }
+
+    // Assuming each user's answer is stored in a way that can be matched to questionId and option value
+
+    // Log desired information
   };
 
   return (
@@ -358,7 +364,11 @@ export default function ParticipationByEntity({
             </div>
 
             <TableUser entityUsers={entityUsers} />
-            <FilterUsers setIsDialogOpen={setIsDialogOpen} isDialogOpen={isDialogOpen} dialogContent={dialogContent}></FilterUsers>
+            <FilterUsers
+              setIsDialogOpen={setIsDialogOpen}
+              isDialogOpen={isDialogOpen}
+              dialogContent={dialogContent}
+            ></FilterUsers>
 
             <Comments entityUsers={entityUsers} />
           </TabsContent>

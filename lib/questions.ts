@@ -159,8 +159,8 @@ export const questions: EntityQuestion[] = [
           "Já organizaste algum evento de grande dimensão no Estádio Algarve?",
         type: "radio",
         options: [
-          { id: 1, value: 2, label: "Sim" },
-          { id: 1, value: 2, label: "Não" },
+          { id: 1, value: 1, label: "Sim" },
+          { id: 2, value: 2, label: "Não" },
         ],
       },
       {
@@ -391,9 +391,9 @@ export const questions: EntityQuestion[] = [
         options: [
           { id: 1, label: "Evento desportivo", value: 1 },
           { id: 2, label: "Evento Cultural", value: 2 },
-          { id: 4, label: "Feira ou exposição", value: 3 },
-          { id: 5, label: "Conferências e seminários", value: 4 },
-          { id: 6, label: "Outro", value: 5 },
+          { id: 3, label: "Feira ou exposição", value: 3 },
+          { id: 4, label: "Conferências e seminários", value: 4 },
+          { id: 5, label: "Outro", value: 5 },
         ],
       },
       {
