@@ -199,12 +199,12 @@ export const questions: EntityQuestion[] = [
             value: 1,
             label: "Sim, gostaria de receber mais informações.",
           },
-          {
+       /*    {
             id: 2,
             value: 2,
             label: "Talvez, gostaria de obter mais detalhes.",
-          },
-          { id: 3, value: 3, label: "Não, obrigado(a)." },
+          }, */
+          { id: 2, value: 2, label: "Não, obrigado(a)." },
         ],
       },
       {
