@@ -16,15 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+
 
 interface UserInformation {
   name: string | undefined;
@@ -77,7 +69,7 @@ export default function FilterUsers({
             <Table className="rounded-md border">
               <TableBody className="text-sm">
                 {dialogContent.users?.map((user, index) => (
-                  <TableRow key={index}>
+                  <TableRow key={`dialog-${index}`}>
                     <TableCell>
                       <span className="block font-bold text-xs ">
                         {user.entityName}

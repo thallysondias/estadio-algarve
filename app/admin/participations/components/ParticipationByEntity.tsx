@@ -40,6 +40,7 @@ import TableUser from "./TableUsers";
 import Comments from "./Comments";
 import FilterUsers from "./FilterUsers";
 
+
 interface UserInformation {
   name: string | undefined;
   userEmail: string;
@@ -64,7 +65,7 @@ const renderChartsForEntity = (
   // Suas implementações de renderChartsForEntity e groupUsersByEntity
   const charts = questions.flatMap((question) => {
     if (question.entity_id === entityId) {
-      return question.questions.flatMap((q) => {
+      return question.questions.flatMap((q, index) => {
         // Verifica se q.options é definido e é um array antes de usar map
         if (Array.isArray(q.options)) {
           const answersCount = countAnswersByQuestion(
@@ -76,7 +77,7 @@ const renderChartsForEntity = (
             count: answersCount[option.value] || 0,
           }));
           return (
-            <Card key={`chart-${question.question_id}`}>
+            <Card key={`chart-${q.question_id || index}`}>
               <CardHeader>
                 <CardDescription>{q.question}</CardDescription>
               </CardHeader>
@@ -109,7 +110,7 @@ const renderChartsForEntity = (
                           entityUsers,
                           questions
                         )
-                      }
+                      } 
                     />
                     <Tooltip />
                   </BarChart>
@@ -256,13 +257,13 @@ export default function ParticipationByEntity({
             Number(extra.value) === optionDetails?.value
         )
       );
-
+      
       const userInformation = filteredUsers.map((user) => ({
         name: user.base?.first_name,
         userEmail: user.base?.email,
         userCellphone: user.base?.cellphone,
         entity: user.extra?.find((extra) => extra.field_id === 3)?.value, // Adjust according to your data structure
-        entityName: user.extra?.[0]?.value,
+        entityName:  user.extra?.[0]?.value,
         response: optionLabel,
       }));
 
@@ -276,10 +277,6 @@ export default function ParticipationByEntity({
       console.log("Dialog should open");
       setIsDialogOpen(true);
     }
-
-    // Assuming each user's answer is stored in a way that can be matched to questionId and option value
-
-    // Log desired information
   };
 
   return (
@@ -360,13 +357,8 @@ export default function ParticipationByEntity({
               )}
             </div>
 
-            <FilterUsers
-              setIsDialogOpen={setIsDialogOpen}
-              isDialogOpen={isDialogOpen}
-              dialogContent={dialogContent}
-            />
-            
             <TableUser entityUsers={entityUsers} />
+            <FilterUsers setIsDialogOpen={setIsDialogOpen} isDialogOpen={isDialogOpen} dialogContent={dialogContent}></FilterUsers>
 
             <Comments entityUsers={entityUsers} />
           </TabsContent>
