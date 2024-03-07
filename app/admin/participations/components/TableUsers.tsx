@@ -122,7 +122,7 @@ export default function TableUser({
                   <TableCell>
                   {getPartnershipInterest(contact)}
                   </TableCell>
-                  <TableCell>{contact.extra?.[3]?.value ? Number(contact.extra[3].value) : ''}</TableCell>
+                  <TableCell>{contact.extra?.[3]?.value ? Math.max(0, Number(contact.extra[3].value)-1) : ''}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
