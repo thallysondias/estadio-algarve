@@ -15,7 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <>   
+      <ClerkProvider dynamic> 
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
           <MainNav className="mx-6" />
@@ -26,5 +27,7 @@ export default function RootLayout({
       </div>
       {children}
     </ClerkProvider>
+    </>
+
   );
 }
